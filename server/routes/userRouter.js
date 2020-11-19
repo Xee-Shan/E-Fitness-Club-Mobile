@@ -94,9 +94,10 @@ router.post("/register", async (req, res) => {
       role,
       address,
     });
+    console.log(req.body);
     newUser.save();
 
-  /*  if (newUser.role === "user") {
+    /*  if (newUser.role === "user") {
       const saveUser = newUser.save().then((user) => {
         smtpTransport.sendMail({
           to: user.email,
