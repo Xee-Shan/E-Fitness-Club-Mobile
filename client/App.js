@@ -3,16 +3,19 @@ import "react-native-gesture-handler";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-//import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import SplashScreen from "./screens/SplashScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import AboutScreen from "./screens/AboutScreen";
 import ContactScreen from "./screens/ContactScreen";
 import SignUpScreen from "./screens/SignUpScreen";
+import AddProduct from "./screens/admin/E-Commerece/AddProduct";
+import Product from "./screens/admin/E-Commerece/Product";
+import AdminDashboard from "./screens/admin/AdminDashboard";
 
 const Stack = createStackNavigator();
-//const Drawer=createDrawerNavigator();
+const Drawer=createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
@@ -27,14 +30,14 @@ const MyTabs = () => {
   );
 };
 
-// const MyDrawer=()=> {
-//   return (
-//     <Drawer.Navigator>
-//       {/* <Drawer.Screen name="Home" component={HomeScreen} />
-//       <Drawer.Screen name="About" component={AboutScreen} /> */}
-//     </Drawer.Navigator>
-//   );
-// }
+const MyDrawer=()=> {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="AddProduct" component={AddProduct} />
+      <Drawer.Screen name="Product" component={Product} />
+    </Drawer.Navigator>
+  );
+}
 
 const App = () => {
   return (
@@ -42,6 +45,7 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Home" component={MyTabs} />
+        <Stack.Screen name="AdminDashboard" component={MyDrawer} />
       </Stack.Navigator>
     </NavigationContainer>
   );

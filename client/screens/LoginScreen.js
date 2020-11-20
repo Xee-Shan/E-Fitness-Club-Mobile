@@ -13,7 +13,11 @@ import {
   Button,
 } from "native-base";
 
-export default function LoginScreen() {
+export default function LoginScreen(props) {
+  const btnClicked=()=>{
+    
+    props.navigation.navigate("AdminDashboard");
+  }
   return (
     <Container>
       <Header />
@@ -31,7 +35,7 @@ export default function LoginScreen() {
             />
           </Item>
           <Item>
-            <Button primary>
+            <Button primary onPress={btnClicked}>
               <Text> Login </Text>
             </Button>
           </Item>
