@@ -41,7 +41,7 @@ export default function SignUpScreen(props) {
       await Axios.post("http://10.0.2.2:5002/users/register", user).then(
         (res) => {
           if(res.data)
-          props.navigation.navigate("Home");
+          props.navigation.navigate("Login");
         }
       );
     } catch (err) {
