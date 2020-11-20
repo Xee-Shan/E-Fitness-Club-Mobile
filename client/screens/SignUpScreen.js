@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { ImagePropTypes, StyleSheet } from "react-native";
+import {  StyleSheet } from "react-native";
 import {
   Container,
   Header,
   Content,
-  Icon,
   Form,
   Item,
   Text,
@@ -15,7 +14,7 @@ import {
 } from "native-base";
 import Axios from "axios";
 
-export default function SignUpScreen() {
+export default function SignUpScreen(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
@@ -41,7 +40,7 @@ export default function SignUpScreen() {
       console.log(user);
       await Axios.post("http://10.0.2.2:5002/users/register", user).then(
         (res) => {
-          alert("hello");
+          if(res.data)
           props.navigation.navigate("Home");
         }
       );
@@ -68,11 +67,11 @@ export default function SignUpScreen() {
           </Item>
           <Item floatingLabel>
             <Label>Password</Label>
-            <Input onChangeText={(value) => setPassword(value)} />
+            <Input secureTextEntry onChangeText={(value) => setPassword(value)} />
           </Item>
           <Item floatingLabel>
             <Label>Confirm Password</Label>
-            <Input onChangeText={(value) => setPasswordCheck(value)} />
+            <Input secureTextEntry onChangeText={(value) => setPasswordCheck(value)} />
           </Item>
           <Item>
             <Label>Gender</Label>

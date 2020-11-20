@@ -1,8 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from "@react-navigation/stack";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import SplashScreen from './screens/SplashScreen';
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -11,9 +12,11 @@ import ContactScreen from "./screens/ContactScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 
 const Stack=createStackNavigator();
+const Drawer=createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+
+const MyTabs=()=> {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -24,6 +27,15 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+
+// const MyDrawer=()=> {
+//   return (
+//     <Drawer.Navigator>
+//       {/* <Drawer.Screen name="Home" component={HomeScreen} />
+//       <Drawer.Screen name="About" component={AboutScreen} /> */}
+//     </Drawer.Navigator>
+//   );
+// }
 
 const App = () => {
   return (
