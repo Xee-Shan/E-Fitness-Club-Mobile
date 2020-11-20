@@ -26,26 +26,23 @@ export default function SignUpScreen(props) {
   const [error, setError] = useState();
 
   const btnClicked = async () => {
-    try {
-      const user = {
-        name,
-        email,
-        userName,
-        password,
-        passwordCheck,
-        gender,
-        phoneNumber,
-        address,
-      };
-      console.log(user);
-      await Axios.post("http://10.0.2.2:5002/users/register", user).then(
-        (res) => {
-          if (res.data) props.navigation.navigate("Login");
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    }
+    const user = {
+      name,
+      email,
+      userName,
+      password,
+      passwordCheck,
+      gender,
+      phoneNumber,
+      address,
+    };
+
+    await Axios.post("http://10.0.2.2:5002/users/register", user).then(
+      (res) => {
+        console.log(res.data);
+        if (res.data.success) props.navigation.navigate("Login");
+      }
+    );
   };
   return (
     <Container>

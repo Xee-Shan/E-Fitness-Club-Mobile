@@ -95,7 +95,13 @@ router.post("/register", async (req, res) => {
       address,
     });
     console.log(req.body);
-    newUser.save();
+    newUser.save((err, doc) => {
+      if (err) {
+        return res.status(400).json({ success: false });
+      } else {
+        return res.status(200).json({ success: true });
+      }
+    });
 
     /*  if (newUser.role === "user") {
       const saveUser = newUser.save().then((user) => {
