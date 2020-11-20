@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   Container,
   Header,
@@ -40,8 +40,7 @@ export default function SignUpScreen(props) {
       console.log(user);
       await Axios.post("http://10.0.2.2:5002/users/register", user).then(
         (res) => {
-          if(res.data)
-          props.navigation.navigate("Login");
+          if (res.data) props.navigation.navigate("Login");
         }
       );
     } catch (err) {
@@ -67,11 +66,17 @@ export default function SignUpScreen(props) {
           </Item>
           <Item floatingLabel>
             <Label>Password</Label>
-            <Input secureTextEntry={true} onChangeText={(value) => setPassword(value)} />
+            <Input
+              secureTextEntry={true}
+              onChangeText={(value) => setPassword(value)}
+            />
           </Item>
           <Item floatingLabel>
             <Label>Confirm Password</Label>
-            <Input secureTextEntry={true} onChangeText={(value) => setPasswordCheck(value)} />
+            <Input
+              secureTextEntry={true}
+              onChangeText={(value) => setPasswordCheck(value)}
+            />
           </Item>
           <Item>
             <Label>Gender</Label>
