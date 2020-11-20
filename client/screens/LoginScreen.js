@@ -29,7 +29,7 @@ export default function LoginScreen() {
           </Item>
           <Item floatingLabel>
             <Label>Email</Label>
-            <Input secureTextEntry onChangeText={(value) => setEmail(value)} />
+            <Input secureTextEntry={true} onChangeText={(value) => setEmail(value)} />
           </Item>
           <Item>
             <Button primary onPress={btnClicked}>

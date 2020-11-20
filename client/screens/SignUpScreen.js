@@ -67,11 +67,11 @@ export default function SignUpScreen(props) {
           </Item>
           <Item floatingLabel>
             <Label>Password</Label>
-            <Input secureTextEntry onChangeText={(value) => setPassword(value)} />
+            <Input secureTextEntry={true} onChangeText={(value) => setPassword(value)} />
           </Item>
           <Item floatingLabel>
             <Label>Confirm Password</Label>
-            <Input secureTextEntry onChangeText={(value) => setPasswordCheck(value)} />
+            <Input secureTextEntry={true} onChangeText={(value) => setPasswordCheck(value)} />
           </Item>
           <Item>
             <Label>Gender</Label>
