@@ -25,13 +25,14 @@ export default function LoginScreen(props) {
         loginUser
       );
       if (loginRes.data.user.role === "user") {
-        AsyncStorage.setItem("auth-token", loginRes.data.token);
-        AsyncStorage.getItem("auth-token");
-
+        const token=JSON.stringify(loginRes.data.token)
+       await AsyncStorage.setItem("auth-token", token);
+       const value=await AsyncStorage.getItem("auth-token");
+        console.log(value);
         props.navigation.navigate("UserAccount");
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.msg);
     }
   };
   return (
