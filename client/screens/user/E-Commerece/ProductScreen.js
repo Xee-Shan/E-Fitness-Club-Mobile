@@ -22,8 +22,7 @@ export default function ProductScreen() {
   useEffect(() => {
     async function fetchData() {
       const token=await AsyncStorage.getItem("auth-token");
-      const response = await axios.get("http://10.0.2.2:5002/products/get",{ headers: { "x-auth-token": token }});
-
+      const response = await axios.get("http://10.0.2.2:5002/products/get",{ headers: { "x-auth-token": JSON.parse(token)}});
       setProduct(response.data);
     }
 
