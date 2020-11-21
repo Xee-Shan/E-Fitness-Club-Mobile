@@ -14,10 +14,9 @@ import {
 } from "native-base";
 
 export default function LoginScreen(props) {
-  const btnClicked=()=>{
-    
-    props.navigation.navigate("AdminDashboard");
-  }
+  const btnClicked = () => {
+    props.navigation.navigate("UserAccount");
+  };
   return (
     <Container>
       <Header />
