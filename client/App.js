@@ -10,15 +10,14 @@ import LoginScreen from "./screens/LoginScreen";
 import AboutScreen from "./screens/AboutScreen";
 import ContactScreen from "./screens/ContactScreen";
 import SignUpScreen from "./screens/SignUpScreen";
-import AddProduct from "./screens/admin/E-Commerece/AddProduct";
-import Product from "./screens/admin/E-Commerece/Product";
-import AdminDashboard from "./screens/admin/AdminDashboard";
+import ProductScreen from "./screens/user/E-Commerece/ProductScreen";
+
 
 const Stack = createStackNavigator();
 const Drawer=createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-const MyTabs = () => {
+const HomeTabs = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -30,11 +29,10 @@ const MyTabs = () => {
   );
 };
 
-const MyDrawer=()=> {
+const UserDrawer=()=> {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="AddProduct" component={AddProduct} />
-      <Drawer.Screen name="Product" component={Product} />
+      <Drawer.Screen name="Product" component={ProductScreen} />
     </Drawer.Navigator>
   );
 }
@@ -44,8 +42,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Home" component={MyTabs} />
-        <Stack.Screen name="AdminDashboard" component={MyDrawer} />
+        <Stack.Screen name="Home" component={HomeTabs} />
+        <Stack.Screen name="UserAccount" component={UserDrawer} />
       </Stack.Navigator>
     </NavigationContainer>
   );

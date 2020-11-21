@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-export default function AdminDashboard() {
+export default function ProductCategoryScreen() {
     return (
         <View>
-            <Text>Welcome to Admin's Portal</Text>
+            <Text></Text>
         </View>
     )
 }
