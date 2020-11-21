@@ -33,7 +33,8 @@ export default function ProductScreen() {
     <Container>
       <Header />
       <Content>
-        <Card style={{ flex: 0 }}>
+        {product.map((product,i)=>{
+        <Card style={{ flex: 0 }} key={i}>
           <CardItem>
             <Body>
               <Image
@@ -57,6 +58,7 @@ export default function ProductScreen() {
             </Left>
           </CardItem>
         </Card>
+})}
       </Content>
     </Container>
   );
