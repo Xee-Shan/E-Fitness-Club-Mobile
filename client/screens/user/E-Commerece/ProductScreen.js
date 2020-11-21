@@ -14,13 +14,15 @@ import {
 } from "native-base";
 import { Image } from "react-native";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProductScreen() {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("http://10.0.2.2:5002/products/get",{ headers: { "x-auth-token": localStorage.getItem("auth-token") }});
+      const token=await AsyncStorage.getItem("auth-token");
+      const response = await axios.get("http://10.0.2.2:5002/products/get",{ headers: { "x-auth-token": token }});
 
       setProduct(response.data);
     }

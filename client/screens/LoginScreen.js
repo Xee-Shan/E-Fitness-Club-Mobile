@@ -27,8 +27,6 @@ export default function LoginScreen(props) {
       if (loginRes.data.user.role === "user") {
         const token=JSON.stringify(loginRes.data.token)
        await AsyncStorage.setItem("auth-token", token);
-       const value=await AsyncStorage.getItem("auth-token");
-        console.log(value);
         props.navigation.navigate("UserAccount");
       }
     } catch (err) {
