@@ -21,7 +21,7 @@ export default function ProductScreen() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get("http://10.0.2.2:5002/products/get");
-      console.log(response.data);
+
       setProduct(response.data);
     }
 
@@ -33,32 +33,35 @@ export default function ProductScreen() {
     <Container>
       <Header />
       <Content>
-        {product.map((product,i)=>{
-        <Card style={{ flex: 0 }} key={i}>
-          <CardItem>
-            <Body>
-              <Image
-                source={product.imageURL}
-                style={{ height: 200, width: 200, flex: 1 }}
-              />
-              <Text>{product.brand}</Text>
-              <Text>${product.price}</Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Left>
-              <Button
-                //onPress={() => btnClicked(product._id)}
-                transparent
-                textStyle={{ color: "#87838B" }}
-              >
-                <Icon name="logo-github" />
-                <Text>Details</Text>
-              </Button>
-            </Left>
-          </CardItem>
-        </Card>
-})}
+        {product.map((product, i) => {
+          console.log(product);
+          return (
+            <Card style={{ flex: 0 }} key={i}>
+              <CardItem>
+                <Body>
+                  <Image
+                    source={{ uri: product.imageURL }}
+                    style={{ height: 200, width: 200, flex: 1 }}
+                  />
+                  <Text>{product.brand}</Text>
+                  <Text>${product.price}</Text>
+                </Body>
+              </CardItem>
+              <CardItem>
+                <Left>
+                  <Button
+                    //onPress={() => btnClicked(product._id)}
+                    transparent
+                    textStyle={{ color: "#87838B" }}
+                  >
+                    <Icon name="logo-github" />
+                    <Text>Details</Text>
+                  </Button>
+                </Left>
+              </CardItem>
+            </Card>
+          );
+        })}
       </Content>
     </Container>
   );

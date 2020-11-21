@@ -10,13 +10,14 @@ import {
   Label,
   Button,
 } from "native-base";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Axios from "axios";
 
 export default function LoginScreen(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const btnClicked = () => {
+  const btnClicked = async () => {
     try {
       const loginUser = { email, password };
       const loginRes = await Axios.post(
@@ -25,9 +26,11 @@ export default function LoginScreen(props) {
       );
       if (loginRes.data.user.role === "user") {
         AsyncStorage.setItem("auth-token", loginRes.data.token);
+        AsyncStorage.getItem("auth-token");
+
         props.navigation.navigate("UserAccount");
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
