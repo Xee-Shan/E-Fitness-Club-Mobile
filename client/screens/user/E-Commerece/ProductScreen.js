@@ -20,7 +20,7 @@ export default function ProductScreen() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("http://10.0.2.2:5002/products/get");
+      const response = await axios.get("http://10.0.2.2:5002/products/get",{ headers: { "x-auth-token": localStorage.getItem("auth-token") }});
 
       setProduct(response.data);
     }
