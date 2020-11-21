@@ -20,7 +20,7 @@ export default function LoginScreen(props) {
     try {
       const loginUser = { email, password };
       const loginRes = await Axios.post(
-        "http://localhost:5000/users/login",
+        "http://10.0.2.2:5002/users/login",
         loginUser
       );
       if (loginRes.data.user.role === "user") {

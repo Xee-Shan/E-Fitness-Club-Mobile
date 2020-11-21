@@ -15,7 +15,7 @@ export default function ProductDetailScreen() {
   useEffect(() => {
     function fetchData() {
       axios
-        .get("http://localhost:5000/products/get/" + props.match.params.id)
+        .get("http://10.0.2.2:5002/products/get/" + props.match.params.id)
         .then((res) => {
           setProduct(res.data);
         });
