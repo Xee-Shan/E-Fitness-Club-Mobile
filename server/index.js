@@ -26,3 +26,4 @@ mongoose.connect(
 );
 
 app.use("/users", require("./routes/userRouter"));
+app.use("/products", require("./routes/productRouter"));
