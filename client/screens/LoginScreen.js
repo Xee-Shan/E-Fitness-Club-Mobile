@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { View } from "react-native";
 import {
   Container,
   Header,
@@ -9,13 +8,28 @@ import {
   Text,
   Input,
   Label,
-  Picker,
   Button,
 } from "native-base";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen(props) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   const btnClicked = () => {
-    props.navigation.navigate("UserAccount");
+    try {
+      const loginUser = { email, password };
+      const loginRes = await Axios.post(
+        "http://localhost:5000/users/login",
+        loginUser
+      );
+      if (loginRes.data.user.role === "user") {
+        AsyncStorage.setItem("auth-token", loginRes.data.token);
+        props.navigation.navigate("UserAccount");
+      }
+    }catch(err){
+      console.log(err);
+    }
   };
   return (
     <Container>
@@ -30,7 +44,7 @@ export default function LoginScreen(props) {
             <Label>Password</Label>
             <Input
               secureTextEntry={true}
-              onChangeText={(value) => setEmail(value)}
+              onChangeText={(value) => setPassword(value)}
             />
           </Item>
           <Item>

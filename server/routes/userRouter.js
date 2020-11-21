@@ -205,7 +205,6 @@ router.post("/new/password", async (req, res) => {
     expireToken: { $gt: Date.now() },
   }).then((user) => {
     if (!user) {
-      console.log("sasasasa");
       //return res.status(400).json({ error: "Try again session expired" });
     }
     bcrypt.hash(password, 12).then((hashpassword) => {
@@ -288,7 +287,7 @@ router.delete("/delete/employee/:id", auth, admin, async (req, res) => {
 });
 
 //add to Cart
-router.post("/addToCart/:myQuantity", auth, async (req, res) => {
+router.post("/addToCart/:myQuantity", async (req, res) => {
   const myQuantity = Number(req.params.myQuantity);
   User.findOne({ _id: req.user }, (err, userInfo) => {
     let duplicate = false;
@@ -343,13 +342,13 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
 });
 
 //get cart
-router.get("/getCart", auth, async (req, res) => {
+router.get("/getCart", async (req, res) => {
   const user = await User.findById(req.user);
   res.send(user.cart);
 });
 
 //remove from cart
-router.delete("/removeFromCart/:id", auth, async (req, res) => {
+router.delete("/removeFromCart/:id", async (req, res) => {
   // User.findOneAndUpdate(
   //   {_id:req.user},
   //   {"$pull":
