@@ -7,8 +7,8 @@ const productSchema = {
   quantity: Number,
   description: String,
   category: String,
-  imageName: String,
-  imagePath: String,
+  imageURL:String,
+  cloudinary_id:String
 };
 
 const Product = mongoose.model("Product", productSchema);
