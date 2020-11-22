@@ -6,10 +6,10 @@ const trainingSchema = new mongoose.Schema({
   targetArea: { type: String },
   equipment: { type: String },
   description: { type: String },
-  imageName: { type: String },
-  imagePath: { type: String },
   exercise: { type: Array },
   workoutList: { type: Array },
+  imageURL: { type: String },
+  cloudinary_id: { type: String },
 });
 
 const Training = mongoose.model("Training", trainingSchema);

@@ -17,36 +17,33 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProductScreen() {
-  const [product, setProduct] = useState([]);
+  const [program, setProgram] = useState();
+
+  const fetchPrograms = async () => {
+    const token = await AsyncStorage.getItem("auth-token");
+    const response = await axios.get("http://10.0.2.2:5002/training/get");
+    setProgram(response.data);
+  };
 
   useEffect(() => {
-    async function fetchData() {
-      const token = await AsyncStorage.getItem("auth-token");
-      const response = await axios.get("http://10.0.2.2:5002/products/get", {
-        headers: { "x-auth-token": JSON.parse(token) },
-      });
-      setProduct(response.data);
-    }
-
-    fetchData();
+    fetchPrograms();
   }, []);
 
   return (
     <Container>
       <Header />
       <Content>
-        {product.map((product, i) => {
-          console.log(product);
+        {program.map((data, i) => {
           return (
             <Card style={{ flex: 0 }} key={i}>
               <CardItem>
                 <Body>
                   <Image
-                    source={{ uri: product.imageURL }}
+                    source={{ uri: data.imageURL }}
                     style={{ height: 200, width: 200, flex: 1 }}
                   />
-                  <Text>{product.brand}</Text>
-                  <Text>${product.price}</Text>
+                  <Text>{data.title}</Text>
+                  <Text>{data.targetArea}</Text>
                 </Body>
               </CardItem>
               <CardItem>

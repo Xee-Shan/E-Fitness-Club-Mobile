@@ -3,7 +3,7 @@ import "react-native-gesture-handler";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import SplashScreen from "./screens/SplashScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -11,10 +11,10 @@ import AboutScreen from "./screens/AboutScreen";
 import ContactScreen from "./screens/ContactScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import ProductScreen from "./screens/user/E-Commerece/ProductScreen";
-
+import ProgramScreen from "./screens/user/Training System/Program";
 
 const Stack = createStackNavigator();
-const Drawer=createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeTabs = () => {
@@ -29,13 +29,14 @@ const HomeTabs = () => {
   );
 };
 
-const UserDrawer=()=> {
+const UserDrawer = () => {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Product" component={ProductScreen} />
+      <Drawer.Screen name="Program" component={ProgramScreen} />
     </Drawer.Navigator>
   );
-}
+};
 
 const App = () => {
   return (
