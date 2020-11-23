@@ -17,23 +17,23 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProductScreen() {
-  const [program, setProgram] = useState();
+  const [blog, setBlog] = useState();
 
-  const fetchPrograms = async () => {
+  const fetchBlogs = async () => {
     const token = await AsyncStorage.getItem("auth-token");
-    const response = await axios.get("http://10.0.2.2:5002/trainings/get");
-    setProgram(response.data);
+    const response = await axios.get("http://10.0.2.2:5002/blogs/get");
+    setBlog(response.data);
   };
 
   useEffect(() => {
-    fetchPrograms();
+    fetchBlogs();
   }, []);
 
   return (
     <Container>
       <Header />
       <Content>
-        {program?.map((data, i) => {
+        {blog?.map((data, i) => {
           return (
             <Card style={{ flex: 0 }} key={i}>
               <CardItem>
@@ -43,7 +43,6 @@ export default function ProductScreen() {
                     style={{ height: 200, width: 200, flex: 1 }}
                   />
                   <Text>{data.title}</Text>
-                  <Text>{data.targetArea}</Text>
                 </Body>
               </CardItem>
               <CardItem>

@@ -12,6 +12,7 @@ import ContactScreen from "./screens/ContactScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import ProductScreen from "./screens/user/E-Commerece/ProductScreen";
 import ProgramScreen from "./screens/user/Training System/Program";
+import BlogScreen from "./screens/user/Blogs/Blog";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,6 +35,7 @@ const UserDrawer = () => {
     <Drawer.Navigator>
       <Drawer.Screen name="Product" component={ProductScreen} />
       <Drawer.Screen name="Program" component={ProgramScreen} />
+      <Drawer.Screen name="Blogs" component={BlogScreen} />
     </Drawer.Navigator>
   );
 };
