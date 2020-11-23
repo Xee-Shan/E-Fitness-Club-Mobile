@@ -15,7 +15,7 @@ import {
 import { Image } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import {NavigationScreenOption,NavigationParams} from "react-navigation"
 export default function ProductScreen() {
   const [product, setProduct] = useState([]);
 
@@ -32,7 +32,7 @@ export default function ProductScreen() {
   }, []);
 
   const btnClicked=(id)=>{
-    props.navigation.navigate("ProductDetail",JSON.stringify(id));
+    props.navigation.navigate("ProductDetail",{id:id});
   }
   return (
     <Container>
