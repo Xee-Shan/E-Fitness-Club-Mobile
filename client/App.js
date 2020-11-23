@@ -13,6 +13,7 @@ import SignUpScreen from "./screens/SignUpScreen";
 import ProductScreen from "./screens/user/E-Commerece/ProductScreen";
 import ProgramScreen from "./screens/user/Training System/Program";
 import BlogScreen from "./screens/user/Blogs/Blog";
+import ProductDetailScreen from "./screens/user/E-Commerece/ProductDetailScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,6 +48,7 @@ const App = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="UserAccount" component={UserDrawer} />
+        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
