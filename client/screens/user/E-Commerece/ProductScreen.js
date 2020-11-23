@@ -31,12 +31,14 @@ export default function ProductScreen() {
     fetchData();
   }, []);
 
+  const btnClicked=(id)=>{
+    props.navigation.navigate("ProductDetail",JSON.stringify(id));
+  }
   return (
     <Container>
       <Header />
       <Content>
         {product.map((product, i) => {
-          console.log(product);
           return (
             <Card style={{ flex: 0 }} key={i}>
               <CardItem>
@@ -52,7 +54,7 @@ export default function ProductScreen() {
               <CardItem>
                 <Left>
                   <Button
-                    //onPress={() => btnClicked(product._id)}
+                    onPress={() => btnClicked(product._id)}
                     transparent
                     textStyle={{ color: "#87838B" }}
                   >
