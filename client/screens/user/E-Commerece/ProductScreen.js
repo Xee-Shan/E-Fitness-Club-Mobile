@@ -15,13 +15,9 @@ import {
 import { Image } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-<<<<<<< Updated upstream
-import {NavigationScreenOption,NavigationParams} from "react-navigation"
-export default function ProductScreen() {
-=======
+import ProductDetailScreen from "./ProductDetailScreen";
 
 export default function ProductScreen({ navigation }) {
->>>>>>> Stashed changes
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
@@ -36,15 +32,9 @@ export default function ProductScreen({ navigation }) {
     fetchData();
   }, []);
 
-<<<<<<< Updated upstream
-  const btnClicked=(id)=>{
-    props.navigation.navigate("ProductDetail",{id:id});
-  }
-=======
   const btnClicked = (id) => {
-    navigation.navigate("ProductDetail", JSON.stringify(id));
+    navigation.navigate("ProductDetail", { id: id });
   };
->>>>>>> Stashed changes
   return (
     <Container>
       <Header />
