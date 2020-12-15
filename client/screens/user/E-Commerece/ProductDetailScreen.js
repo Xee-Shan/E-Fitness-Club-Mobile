@@ -24,7 +24,7 @@ export default function ProductDetailScreen({ route, navigation }) {
 
   useEffect(() => {
     const { id } = route.params;
-    console.log(JSON.stringify(id));
+    console.log(id);
   });
 
   // useEffect(() => {
