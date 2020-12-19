@@ -95,7 +95,7 @@ export default function CartScreen() {
           item.name +
             " more than available in stock please, try to add to cart again"
         );
-        axios.delete("http://localhost:5000/users/removeFromCart/" + item.id, {
+        axios.delete("http://10.0.2.2:5002/users/removeFromCart/" + item.id, {
           headers: { "x-auth-token": localStorage.getItem("auth-token") },
         });
         window.location.reload();

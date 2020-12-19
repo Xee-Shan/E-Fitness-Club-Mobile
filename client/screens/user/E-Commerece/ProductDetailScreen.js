@@ -70,9 +70,9 @@ export default function ProductDetailScreen({ route, navigation }) {
     fetchData();
   }, [cart, route.params.id]);
 
-  const onChangeMyQuantity = (e) => {
-    setMyQuantity(e.target.value);
-  };
+  // const onChangeMyQuantity = (e) => {
+  //   setMyQuantity(e.target.value);
+  // };
 
   const increment = () => {
     setMyQuantity(myQuantity + 1);
@@ -134,14 +134,27 @@ export default function ProductDetailScreen({ route, navigation }) {
             />
           </CardItem>
           <CardItem>
-            <Text>{`Name: ${product.name}~
-              Price : ${product.price}~
-              Brand : ${product.brand}~
-              Description : ${product.description}~
+            <Text>{`
+              Name: ${product.name}
+              Price : ${product.price}
+              Brand : ${product.brand}
+              Description : ${product.description}
               Available: ${product.quantity-orderedQuantity}
             `}</Text>
           </CardItem>
           </Card>
+          <Button primary onPress={increment}>
+              <Text>+</Text>
+            </Button>
+            <Input
+              onChangeText={(value) => setMyQuantity(value)}
+            />
+            <Button primary onPress={decrement}>
+              <Text>-</Text>
+            </Button>
+          <Button primary onPress={btnClicked}>
+              <Text> Add to Cart </Text>
+            </Button>
       </Content>
     </Container>
   );
