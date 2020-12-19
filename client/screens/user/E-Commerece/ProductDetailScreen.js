@@ -135,27 +135,14 @@ export default function ProductDetailScreen({ route, navigation }) {
             />
           </CardItem>
           <CardItem>
-            <Left>
-              <Button transparent>
-                <Text>{product.name}</Text>
-              </Button>
-            </Left>
-            <Body>
-              <Button transparent>
-                <Text>{product.price}</Text>
-              </Button>
-            </Body>
-            <Right>
-              <Text>{product.quantity-orderedQuantity}</Text>
-            </Right>
-            <Right>
-              <Text>{product.description}</Text>
-            </Right>
+            <Text>{`Name: ${product.name}~
+              Price : ${product.price}~
+              Brand : ${product.brand}~
+              Description : ${product.description}~
+              Available: ${product.quantity-orderedQuantity}
+            `}</Text>
           </CardItem>
-        </Card>
-        <Button transparent>
-                <Text>Add to Cart</Text>
-              </Button>
+          </Card>
       </Content>
     </Container>
   );
