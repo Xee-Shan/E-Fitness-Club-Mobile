@@ -111,18 +111,20 @@ export default function CartScreen() {
           <Card>
           <CardItem>
               <Icon active name="logo-googleplus" />
-              <Text>`Name Brand quantity Price`</Text>
+              <Text>Name  Brand  quantity   Price</Text>
               <Right>
                 <Icon name="arrow-forward" />
               </Right>
              </CardItem>
-            <CardItem>
+            { cart.map((cart,i)=>(
+            <CardItem key={i}>
               <Icon active name="logo-googleplus" />
               <Text>`${cart.name} ${cart.brand} ${cart.quantity} ${cart.price}`</Text>
               <Right>
                 <Icon name="arrow-forward" />
               </Right>
              </CardItem>
+            ))}
            </Card>
         </Content>
       </Container>
