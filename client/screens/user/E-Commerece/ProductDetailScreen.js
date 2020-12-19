@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { StyleSheet } from "react-native";
 import { Image } from "react-native";
 import {
@@ -22,15 +23,15 @@ export default function ProductDetailScreen({ route, navigation }) {
   const [product, setProduct] = useState({});
   const [orderedQuantity, setOrderedQuantity] = useState(0);
   const [myQuantity, setMyQuantity] = useState(1);
- 
 
   useEffect(() => {
+    console.log(route.params.id);
     async function fetchData() {
       const token = await AsyncStorage.getItem("auth-token");
       axios
-        .get("http://10.0.2.2:5002/products/get/" + route.params.id,
-        { headers: { "x-auth-token": JSON.parse(token) } }
-        )
+        .get("http://10.0.2.2:5002/products/get/" + route.params.id, {
+          headers: { "x-auth-token": token },
+        })
         .then((res) => {
           console.log(res.data);
           setProduct(res.data);
@@ -64,7 +65,7 @@ export default function ProductDetailScreen({ route, navigation }) {
             const item = cart.find((arr) => arr.id === route.params.id);
             setItemCount(item?.quantity);
           }
-        AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
+          AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
         });
     }
     fetchData();
@@ -89,9 +90,9 @@ export default function ProductDetailScreen({ route, navigation }) {
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
+          style: "cancel",
         },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
+        { text: "OK", onPress: () => console.log("OK Pressed") },
       ],
       { cancelable: false }
     );
@@ -103,16 +104,15 @@ export default function ProductDetailScreen({ route, navigation }) {
       alert("Invalid quantity or quantity more than availabe in stock");
     } else {
       if (product.quantity - orderedQuantity > 0) {
-      const token = await AsyncStorage.getItem("auth-token");
+        const token = await AsyncStorage.getItem("auth-token");
         const response = await axios.post(
           "http://10.0.2.2:5002/users/addToCart/" + myQuantity,
           product,
           { headers: { "x-auth-token": JSON.parse(token) } }
         );
-        if (response.data !== ""){
+        if (response.data !== "") {
           alert("Out of Stock : Item quantity more than " + response.data);
-        }
-        else {
+        } else {
           history.push("/user/cart");
           await AsyncStorage.setItem("item-id", product._id);
           //window.location.reload();
