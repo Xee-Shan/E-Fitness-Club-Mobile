@@ -137,21 +137,25 @@ export default function ProductDetailScreen({ route, navigation }) {
           <CardItem>
             <Left>
               <Button transparent>
-                <Icon active name="thumbs-up" />
                 <Text>{product.name}</Text>
               </Button>
             </Left>
             <Body>
               <Button transparent>
-                <Icon active name="chatbubbles" />
                 <Text>{product.price}</Text>
               </Button>
             </Body>
             <Right>
-              <Text>11h ago</Text>
+              <Text>{product.quantity-orderedQuantity}</Text>
+            </Right>
+            <Right>
+              <Text>{product.description}</Text>
             </Right>
           </CardItem>
         </Card>
+        <Button transparent>
+                <Text>Add to Cart</Text>
+              </Button>
       </Content>
     </Container>
   );
