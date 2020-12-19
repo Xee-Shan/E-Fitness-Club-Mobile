@@ -8,7 +8,6 @@ import {
   Thumbnail,
   Text,
   Button,
-  Icon,
   Left,
   Body,
 } from "native-base";
@@ -59,7 +58,7 @@ export default function ProductScreen({ navigation }) {
                     transparent
                     textStyle={{ color: "#87838B" }}
                   >
-                    <Icon name="logo-github" />
+                    {/* <Icon name="logo-github" /> */}
                     <Text>Details</Text>
                   </Button>
                 </Left>

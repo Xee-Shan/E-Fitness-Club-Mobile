@@ -21,94 +21,107 @@ export default function ProductDetailScreen({ route, navigation }) {
   const [product, setProduct] = useState({});
   const [orderedQuantity, setOrderedQuantity] = useState(0);
   const [myQuantity, setMyQuantity] = useState(1);
+ 
 
   useEffect(() => {
-    const { id } = route.params;
-    console.log(id);
-  });
+    async function fetchData() {
+      const token = await AsyncStorage.getItem("auth-token");
+      axios
+        .get("http://10.0.2.2:5002/products/get/" + route.params.id,
+        { headers: { "x-auth-token": JSON.parse(token) } }
+        )
+        .then((res) => {
+          console.log(res.data);
+          setProduct(res.data);
+        });
+    }
+    fetchData();
+    console.log(product);
+  }, [route.params.id]);
 
-  // useEffect(() => {
-  //   function fetchData() {
-  //     const token = await AsyncStorage.getItem("auth-token");
-  //     axios
-  //       .get("http://10.0.2.2:5002/products/get/" + props.navigation.getParam("id"),
-  //       { headers: { "x-auth-token": JSON.parse(token) } }
-  //       )
-  //       .then((res) => {
-  //         setProduct(res.data);
-  //       });
-  //   }
-  //   fetchData();
-  // }, [props.navigation.getParam("id")]);
+  useEffect(() => {
+    async function fetchData() {
+      const token = await AsyncStorage.getItem("auth-token");
+      const response = await axios.get(
+        "http://10.0.2.2:5002/orders/getById/" + route.params.id,
+        { headers: { "x-auth-token": JSON.parse(token) } }
+      );
+      setOrderedQuantity(response.data.quantity);
+    }
+    fetchData();
+  }, [route.params.id]);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const token = await AsyncStorage.getItem("auth-token");
-  //     const response = await axios.get(
-  //       "http://10.0.2.2:5002/orders/getById/" + props.navigation.getParam("id"),
-  //       { headers: { "x-auth-token": JSON.parse(token) } }
-  //     );
-  //     setOrderedQuantity(response.data.quantity);
-  //   }
-  //   fetchData();
-  // }, [props.navigation.getParam("id")]);
+  useEffect(() => {
+    async function fetchData() {
+      const token = await AsyncStorage.getItem("auth-token");
+      await axios
+        .get("http://10.0.2.2:5002/users/getCart", {
+          headers: { "x-auth-token": JSON.parse(token) },
+        })
+        .then((res) => {
+          setCart(res.data);
+          if (cart.length > 0) {
+            const item = cart.find((arr) => arr.id === route.params.id);
+            setItemCount(item?.quantity);
+          }
+        AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
+        });
+    }
+    fetchData();
+  }, [cart, route.params.id]);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const token = await AsyncStorage.getItem("auth-token");
-  //     await axios
-  //       .get("http://10.0.2.2:5002/users/getCart", {
-  //         headers: { "x-auth-token": JSON.parse(token) },
-  //       })
-  //       .then((res) => {
-  //         setCart(res.data);
-  //         if (cart.length > 0) {
-  //           const item = cart.find((arr) => arr.id === props.navigation.getParam("id"));
-  //           setItemCount(item?.quantity);
-  //         }
-  //       await  AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
-  //       });
-  //   }
-  //   fetchData();
-  // }, [cart, props.navigation.getParam("id")]);
+  const onChangeMyQuantity = (e) => {
+    setMyQuantity(e.target.value);
+  };
 
-  // const onChangeMyQuantity = (e) => {
-  //   setMyQuantity(e.target.value);
-  // };
+  const increment = () => {
+    setMyQuantity(myQuantity + 1);
+  };
+  const decrement = () => {
+    setMyQuantity(myQuantity - 1);
+  };
 
-  // const increment = () => {
-  //   setMyQuantity(myQuantity + 1);
-  // };
-  // const decrement = () => {
-  //   setMyQuantity(myQuantity - 1);
-  // };
-
-  // async function btnClicked(product) {
-  //   if (
-  //     myQuantity <= 0 ||
-  //     myQuantity + itemCount > product.quantity - orderedQuantity
-  //   ) {
-  //     alert("Invalid quantity or quantity more than availabe in stock");
-  //   } else {
-  //     if (product.quantity - orderedQuantity > 0) {
-  //     const token = await AsyncStorage.getItem("auth-token");
-  //       const response = await axios.post(
-  //         "http://10.0.2.2:5002/users/addToCart/" + myQuantity,
-  //         product,
-  //         { headers: { "x-auth-token": JSON.parse(token) } }
-  //       );
-  //       if (response.data !== "")
-  //         alert("Out of Stock : Item quantity more than " + response.data);
-  //       else {
-  //         history.push("/user/cart");
-  //         await AsyncStorage.setItem("item-id", product._id);
-  //         window.location.reload();
-  //       }
-  //     } else {
-  //       alert(product.name + " is out of stock!!!");
-  //     }
-  //   }
-  // }
+  const createTwoButtonAlert = () =>
+    Alert.alert(
+      "Out of Stock",
+      "Item quantity more than available in stock",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
+  async function btnClicked(product) {
+    if (
+      myQuantity <= 0 ||
+      myQuantity + itemCount > product.quantity - orderedQuantity
+    ) {
+      alert("Invalid quantity or quantity more than availabe in stock");
+    } else {
+      if (product.quantity - orderedQuantity > 0) {
+      const token = await AsyncStorage.getItem("auth-token");
+        const response = await axios.post(
+          "http://10.0.2.2:5002/users/addToCart/" + myQuantity,
+          product,
+          { headers: { "x-auth-token": JSON.parse(token) } }
+        );
+        if (response.data !== ""){
+          alert("Out of Stock : Item quantity more than " + response.data);
+        }
+        else {
+          history.push("/user/cart");
+          await AsyncStorage.setItem("item-id", product._id);
+          //window.location.reload();
+        }
+      } else {
+        alert(product.name + " is out of stock!!!");
+      }
+    }
+  }
 
   return (
     <Container>
@@ -117,7 +130,7 @@ export default function ProductDetailScreen({ route, navigation }) {
         <Card>
           <CardItem cardBody>
             <Image
-              source={{ uri: "Image URL" }}
+              source={{ uri: product.imageURL }}
               style={{ height: 200, width: null, flex: 1 }}
             />
           </CardItem>
@@ -125,13 +138,13 @@ export default function ProductDetailScreen({ route, navigation }) {
             <Left>
               <Button transparent>
                 <Icon active name="thumbs-up" />
-                <Text>12 Likes</Text>
+                <Text>{product.name}</Text>
               </Button>
             </Left>
             <Body>
               <Button transparent>
                 <Icon active name="chatbubbles" />
-                <Text>4 Comments</Text>
+                <Text>{product.price}</Text>
               </Button>
             </Body>
             <Right>
