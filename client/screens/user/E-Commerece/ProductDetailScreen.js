@@ -14,6 +14,7 @@ import {
   Body,
   Right,
 } from "native-base";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProductDetailScreen({ route, navigation }) {
   const [cart, setCart] = useState([]);
@@ -36,7 +37,6 @@ export default function ProductDetailScreen({ route, navigation }) {
         });
     }
     fetchData();
-    console.log(product);
   }, [route.params.id]);
 
   useEffect(() => {
