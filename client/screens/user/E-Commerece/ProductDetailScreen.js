@@ -33,7 +33,6 @@ export default function ProductDetailScreen({ route, navigation }) {
           headers: { "x-auth-token": token },
         })
         .then((res) => {
-          console.log(res.data);
           setProduct(res.data);
         });
     }
