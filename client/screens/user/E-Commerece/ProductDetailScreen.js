@@ -134,14 +134,14 @@ export default function ProductDetailScreen({ route, navigation }) {
             />
           </CardItem>
           <CardItem>
-            <Text>{`Name: ${product.name}~
-              Price : ${product.price}~
-              Brand : ${product.brand}~
-              Description : ${product.description}~
-              Available: ${product.quantity-orderedQuantity}
+            <Text>{`
+            Name: ${product.name}
+            Price : ${product.price}
+            Brand : ${product.brand}
+            Available: ${product.quantity - orderedQuantity}
             `}</Text>
           </CardItem>
-          </Card>
+        </Card>
       </Content>
     </Container>
   );
