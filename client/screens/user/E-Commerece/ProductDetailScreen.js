@@ -70,9 +70,9 @@ export default function ProductDetailScreen({ route, navigation }) {
     fetchData();
   }, [cart, route.params.id]);
 
-  const onChangeMyQuantity = (e) => {
-    setMyQuantity(e.target.value);
-  };
+  // const onChangeMyQuantity = (e) => {
+  //   setMyQuantity(e.target.value);
+  // };
 
   const increment = () => {
     setMyQuantity(myQuantity + 1);
