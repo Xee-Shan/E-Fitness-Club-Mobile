@@ -135,13 +135,26 @@ export default function ProductDetailScreen({ route, navigation }) {
           </CardItem>
           <CardItem>
             <Text>{`
-            Name: ${product.name}
-            Price : ${product.price}
-            Brand : ${product.brand}
-            Available: ${product.quantity - orderedQuantity}
+              Name: ${product.name}
+              Price : ${product.price}
+              Brand : ${product.brand}
+              Description : ${product.description}
+              Available: ${product.quantity-orderedQuantity}
             `}</Text>
           </CardItem>
-        </Card>
+          </Card>
+          <Button primary onPress={increment}>
+              <Text>+</Text>
+            </Button>
+            <Input
+              onChangeText={(value) => setMyQuantity(value)}
+            />
+            <Button primary onPress={decrement}>
+              <Text>-</Text>
+            </Button>
+          <Button primary onPress={btnClicked}>
+              <Text> Add to Cart </Text>
+            </Button>
       </Content>
     </Container>
   );
