@@ -306,33 +306,15 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
       }
     });
     if (duplicate && flag === 0) {
-      // User.findOneAndUpdate(
-      //   { _id: req.user, "cart.id": req.body._id },
-      //   { $inc: { "cart.$.quantity": myQuantity } },
-      //   { new: true },
-      //   (err, userInfo) => {
-      //     if (err) return res.json({ success: false, err });
-      //     console.log(flag);
-      //     res.status(200).json(userInfo.cart.quantity);
-      //   }
-      // );
-      async function increment() {
-        const user = await User.findById({ _id: req.user });
-
-        user.cart.map((cart) => {
-          if (cart.id === req.body._id) {
-            console.log(myQuantity);
-            console.log(cart.quantity);
-            cart.quantity=myQuantity+(+cart.quantity);
-            console.log(cart.quantity);
-          }
-        });
-        await user.save((err, userInfo) => {
+      User.findOneAndUpdate(
+        { _id: req.user, "cart.id": req.body._id },
+        { $inc: { "cart.$.quantity": myQuantity } },
+        { new: true },
+        (err, userInfo) => {
           if (err) return res.json({ success: false, err });
           res.status(200).json(userInfo.cart.quantity);
-        });
-      }
-      increment();
+        }
+      );
     } else if (flag === 0) {
       User.findByIdAndUpdate(
         { _id: req.user },
@@ -342,7 +324,7 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
               id: req.body._id,
               quantity: myQuantity,
               name: req.body.name,
-              imageName: req.body.imageName,
+              imageURL: req.body.imageURL,
               brand: req.body.brand,
               price: req.body.price,
               date: Date.now(),
