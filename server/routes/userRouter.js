@@ -362,7 +362,7 @@ router.delete("/removeFromCart/:id", async (req, res) => {
   // )
 
   const user = await User.findByIdAndUpdate(req.user);
-  console.log("cart ID : "+id);
+  console.log("cart ID : "+req.params.id);
   const arr = user.cart.filter((cart) => {
     return cart.id !== req.params.id;
   });
