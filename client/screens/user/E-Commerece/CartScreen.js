@@ -33,7 +33,7 @@ export default function CartScreen({ navigation }) {
         });
     }
     fetchData();
-  });
+  },[]);
 
   useEffect(() => {
     async function fetchData() {
@@ -44,6 +44,7 @@ export default function CartScreen({ navigation }) {
           itemId,
         { headers: { "x-auth-token": JSON.parse(token) } }
       );
+      console.log(response.data.quantity);
       setOrderedQuantity(response.data.quantity);
     }
     fetchData();
