@@ -95,7 +95,7 @@ export default function CartScreen({ navigation }) {
   async function handleOrder() {
     const itemId = await AsyncStorage.getItem("item-id");
     if (cart?.length > 0) {
-      const item = cart.find((arr) => arr.id === itemId);
+      const item = cart.find((arr) => arr.id === JSON.parse(itemId));
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");
         axios.post("http://10.0.2.2:5002/orders/placeOrder", cart, {
