@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const { User } = require("../models/userModel");
 const admin = require("../middleware/admin");
+const { json } = require("express");
 
 router.post("/register", async (req, res) => {
   try {
@@ -320,11 +321,16 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
 
         user.cart.map((cart) => {
           if (cart.id === req.body._id) {
-            cart.quantity=cart.quantity+ myQuantity;
+            console.log(cart.quantity);
+            JSON.parse(cart.quantity);
+            JSON.parse(myQuantity);
+            console.log(typeof cart.quantity);
+            console.log(typeof myQuantity);
+            cart.quantity += myQuantity;
             console.log(cart.quantity);
           }
         });
-        await user.save((err,userInfo)=>{
+        await user.save((err, userInfo) => {
           if (err) return res.json({ success: false, err });
           res.status(200).json(userInfo.cart.quantity);
         });
