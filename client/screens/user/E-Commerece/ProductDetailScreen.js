@@ -98,8 +98,8 @@ export default function ProductDetailScreen({ route, navigation }) {
   //   );
   async function btnClicked(product) {
     if (
-      JSON.parse(myQuantity) <= 0 ||
-      JSON.parse(myQuantity) + itemCount > product.quantity - orderedQuantity
+      myQuantity <= 0 ||
+      myQuantity + itemCount > product.quantity - orderedQuantity
     ) {
       alert("Invalid quantity or quantity more than availabe in stock");
     } else {
