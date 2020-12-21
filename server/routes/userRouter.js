@@ -305,7 +305,6 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
       }
     });
     if (duplicate && flag === 0) {
-      console.log(req.user);
       // User.findOneAndUpdate(
       //   { _id: req.user, "cart.id": req.body._id },
       //   { $inc: { "cart.$.quantity": myQuantity } },
@@ -316,15 +315,18 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
       //     res.status(200).json(userInfo.cart.quantity);
       //   }
       // );
-      const user=User.findByIdAndUpdate({ _id: req.user});
-      user.cart.map(cart=>{
-        if(cart.id===req.body._id){
-          cart.quantity+=myQuantity;
-          console.log(cart.quantity);
-        }
-      });
+      async function increment() {
+        const user = await User.findById({ _id: req.user });
+
+        user.cart.map((cart) => {
+          if (cart.id === req.body._id) {
+            cart.quantity += myQuantity;
+            console.log(cart.quantity);
+          }
+        });
+      }
+      increment();
     } else if (flag === 0) {
-      console.log(flag);
       User.findByIdAndUpdate(
         { _id: req.user },
         {
