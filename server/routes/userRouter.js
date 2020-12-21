@@ -317,7 +317,7 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
       //   }
       // );
       const user=User.findByIdAndUpdate({ _id: req.user});
-      console.log(user.cart.id);
+      console.log(user.cart);
     } else if (flag === 0) {
       console.log(flag);
       User.findByIdAndUpdate(
