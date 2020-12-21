@@ -82,20 +82,20 @@ export default function ProductDetailScreen({ route, navigation }) {
     setMyQuantity(myQuantity - 1);
   };
 
-  const createTwoButtonAlert = () =>
-    Alert.alert(
-      "Out of Stock",
-      "Item quantity more than available in stock",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") },
-      ],
-      { cancelable: false }
-    );
+  // const createTwoButtonAlert = () =>
+  //   Alert.alert(
+  //     "Out of Stock",
+  //     "Item quantity more than available in stock",
+  //     [
+  //       {
+  //         text: "Cancel",
+  //         onPress: () => console.log("Cancel Pressed"),
+  //         style: "cancel",
+  //       },
+  //       { text: "OK", onPress: () => console.log("OK Pressed") },
+  //     ],
+  //     { cancelable: false }
+  //   );
   async function btnClicked(product) {
     if (
       myQuantity <= 0 ||
@@ -113,7 +113,7 @@ export default function ProductDetailScreen({ route, navigation }) {
         if (response.data !== "") {
           alert("Out of Stock : Item quantity more than " + response.data);
         } else {
-          history.push("/user/cart");
+          props.navigation.navigate("Cart");
           await AsyncStorage.setItem("item-id", product._id);
           //window.location.reload();
         }
@@ -147,7 +147,7 @@ export default function ProductDetailScreen({ route, navigation }) {
         <Button primary onPress={increment}>
           <Text>+</Text>
         </Button>
-        <Input onChangeText={(value) => setMyQuantity(value)} />
+        <Input value={myQuantity} onChangeText={(value) => setMyQuantity(value)} />
         <Button primary onPress={decrement}>
           <Text>-</Text>
         </Button>
