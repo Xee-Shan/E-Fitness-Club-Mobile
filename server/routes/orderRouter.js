@@ -26,7 +26,7 @@ router.get("/get",auth,admin,async(req,res)=>{
   });
 });
 
-router.get("/getbyId/:id",async(req,res)=>{
+router.get("/getbyId/:id",auth,async(req,res)=>{
   const order=await Order.find();
   let total=0;
   order.map(order=>{
