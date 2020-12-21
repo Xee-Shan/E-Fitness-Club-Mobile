@@ -317,7 +317,12 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
       //   }
       // );
       const user=User.findByIdAndUpdate({ _id: req.user});
-      console.log(user.cart);
+      user.cart.map(cart=>{
+        if(cart.id===req.body._id){
+          cart.quantity+=myQuantity;
+          console.log(cart.quantity);
+        }
+      });
     } else if (flag === 0) {
       console.log(flag);
       User.findByIdAndUpdate(
