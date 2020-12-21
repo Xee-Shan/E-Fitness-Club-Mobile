@@ -29,7 +29,7 @@ export default function CartScreen({ navigation }) {
         .then((res) => {
           console.log(res.data);
           setCart(res.data);
-          AsyncStorage.setItem("item-count", res.data.length);
+          AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
         });
     }
     fetchData();
@@ -94,6 +94,8 @@ export default function CartScreen({ navigation }) {
 
   async function handleOrder() {
     const itemId = await AsyncStorage.getItem("item-id");
+    JSON.parse(itemId);
+    console.log(typeof itemId);
     if (cart?.length > 0) {
       const item = cart.find((arr) => arr.id === JSON.parse(itemId));
       if (item.quantity <= product.quantity - orderedQuantity) {
