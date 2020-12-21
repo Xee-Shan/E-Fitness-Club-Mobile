@@ -44,7 +44,8 @@ export default function CartScreen({ navigation }) {
           itemId,
         { headers: { "x-auth-token": JSON.parse(token) } }
       );
-      console.log(response.data.quantity);
+      console.log(itemId);
+      console.log(response.data);
       setOrderedQuantity(response.data.quantity);
     }
     fetchData();
