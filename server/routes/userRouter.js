@@ -311,7 +311,11 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
         { $inc: { "cart.$.quantity": myQuantity } },
         { new: true },
         (err, userInfo) => {
-          if (err) return res.json({ success: false, err });
+          if (err) {
+            console.log(err);
+            return res.json({ success: false, err });
+        
+        }
           res.status(200).json(userInfo.cart.quantity);
         }
       );
