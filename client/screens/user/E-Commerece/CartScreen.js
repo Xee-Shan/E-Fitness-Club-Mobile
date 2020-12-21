@@ -70,15 +70,11 @@ export default function CartScreen() {
     setTotal(amount);
   }
   useEffect(() => {
-    function fetchData() {
-      const itemId= await AsyncStorage.getItem("item-id");
-      axios
-        .get(
-          "http://10.0.2.2:5002/products/get/" +itemId
-        )
-        .then((res) => {
-          setProduct(res.data);
-        });
+    async function fetchData() {
+      const itemId = await AsyncStorage.getItem("item-id");
+      axios.get("http://10.0.2.2:5002/products/get/" + itemId).then((res) => {
+        setProduct(res.data);
+      });
     }
     fetchData();
   });
@@ -92,11 +88,9 @@ export default function CartScreen() {
   }
 
   async function handleOrder() {
-    const itemId=await AsyncStorage.getItem("item-id")
+    const itemId = await AsyncStorage.getItem("item-id");
     if (cart?.length > 0) {
-      const item = cart.find(
-        (arr) => arr.id ===itemId
-      );
+      const item = cart.find((arr) => arr.id === itemId);
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");
         axios.post("http://10.0.2.2:5002/orders/placeOrder", cart, {
@@ -113,7 +107,7 @@ export default function CartScreen() {
         axios.delete("http://10.0.2.2:5002/users/removeFromCart/" + item.id, {
           headers: { "x-auth-token": JSON.parse(token) },
         });
-       // window.location.reload();
+        // window.location.reload();
       }
     } else {
       alert("Cart is empty");

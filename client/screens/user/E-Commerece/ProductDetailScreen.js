@@ -59,6 +59,7 @@ export default function ProductDetailScreen({ route, navigation, props }) {
           headers: { "x-auth-token": JSON.parse(token) },
         })
         .then((res) => {
+          console.log(cart);
           setCart(res.data);
           if (cart.length > 0) {
             const item = cart.find((arr) => arr.id === route.params.id);
@@ -112,7 +113,7 @@ export default function ProductDetailScreen({ route, navigation, props }) {
         if (response.data !== "") {
           alert("Out of Stock : Item quantity more than " + response.data);
         } else {
-          props.navigation.navigate("Cart");
+          navigation.navigate("CartScreen");
           await AsyncStorage.setItem("item-id", product._id);
           //window.location.reload();
         }
