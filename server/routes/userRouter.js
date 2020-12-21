@@ -321,7 +321,7 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
 
         user.cart.map((cart) => {
           if (cart.id === req.body._id) {
-            cart.quantity=Number(cart.quantity)+myQuantity;
+            Number(cart.quantity=Number(cart.quantity)+myQuantity);
             console.log(typeof cart.quantity);
             console.log(cart.quantity);
           }
