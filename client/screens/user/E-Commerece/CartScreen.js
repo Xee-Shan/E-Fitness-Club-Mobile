@@ -33,7 +33,7 @@ export default function CartScreen({ navigation }) {
         });
     }
     fetchData();
-  }, []);
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -100,7 +100,6 @@ export default function CartScreen({ navigation }) {
       console.log(typeof item.quantity);
       console.log(typeof product.quantity);
       console.log(typeof orderedQuantity);
-
 
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");
