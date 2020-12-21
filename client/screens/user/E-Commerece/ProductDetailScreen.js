@@ -109,7 +109,6 @@ export default function ProductDetailScreen({ route, navigation, props }) {
           product,
           { headers: { "x-auth-token": JSON.parse(token) } }
         );
-        console.log(response.data);
         if (response.data !== "") {
           alert("Out of Stock : Item quantity more than " + response.data);
         } else {

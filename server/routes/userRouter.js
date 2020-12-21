@@ -343,6 +343,7 @@ router.post("/addToCart/:myQuantity",auth, async (req, res) => {
 
 //get cart
 router.get("/getCart", auth,async (req, res) => {
+  console.log("hello Osama");
   const user = await User.findById(req.user);
   res.send(user.cart);
 });
