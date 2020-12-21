@@ -97,18 +97,19 @@ export default function ProductDetailScreen({ route, navigation, props }) {
   //   );
   async function btnClicked(product) {
     if (
-      myQuantity <= 0 ||
-      myQuantity + itemCount > product.quantity - orderedQuantity
+      JSON.parse(myQuantity) <= 0 ||
+      JSON.parse(myQuantity) + itemCount > product.quantity - orderedQuantity
     ) {
       alert("Invalid quantity or quantity more than availabe in stock");
     } else {
       if (product.quantity - orderedQuantity > 0) {
         const token = await AsyncStorage.getItem("auth-token");
         const response = await axios.post(
-          "http://10.0.2.2:5002/users/addToCart/" + myQuantity,
+          "http://10.0.2.2:5002/users/addToCart/" + JSON.parse(myQuantity),
           product,
           { headers: { "x-auth-token": JSON.parse(token) } }
         );
+        console.log(response.data);
         if (response.data !== "") {
           alert("Out of Stock : Item quantity more than " + response.data);
         } else {
