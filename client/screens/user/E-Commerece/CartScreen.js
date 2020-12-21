@@ -1,8 +1,16 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import {
+  Container,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Icon,
+  Right,
+} from "native-base";
 export default function CartScreen() {
-    const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [orderedQuantity, setOrderedQuantity] = useState();
   const [product, setProduct] = useState();
@@ -11,7 +19,7 @@ export default function CartScreen() {
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get("http://localhost:5000/users/getCart", {
+        .get("http://10.0.2.2:5002/users/getCart", {
           headers: { "x-auth-token": localStorage.getItem("auth-token") },
         })
         .then((res) => {
@@ -25,7 +33,7 @@ export default function CartScreen() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        "http://localhost:5000/orders/getById/" +
+        "http://10.0.2.2:5002/orders/getById/" +
           localStorage.getItem("item-id"),
         { headers: { "x-auth-token": localStorage.getItem("auth-token") } }
       );
@@ -62,8 +70,7 @@ export default function CartScreen() {
     function fetchData() {
       axios
         .get(
-          "http://localhost:5000/products/get/" +
-            localStorage.getItem("item-id")
+          "http://10.0.2.2:5002/products/get/" + localStorage.getItem("item-id")
         )
         .then((res) => {
           setProduct(res.data);
@@ -73,7 +80,7 @@ export default function CartScreen() {
   });
 
   async function handleRemove(id) {
-    axios.delete("http://localhost:5000/users/removeFromCart/" + id, {
+    axios.delete("http://10.0.2.2:5002/users/removeFromCart/" + id, {
       headers: { "x-auth-token": localStorage.getItem("auth-token") },
     });
     //window.location.reload();
@@ -104,31 +111,33 @@ export default function CartScreen() {
       alert("Cart is empty");
     }
   }
-    return (
-        <Container>
-        <Header />
-        <Content>
-          <Card>
+  return (
+    <Container>
+      <Header />
+      <Content>
+        <Card>
           <CardItem>
-              <Icon active name="logo-googleplus" />
-              <Text>Name  Brand  quantity   Price</Text>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-             </CardItem>
-            { cart.map((cart,i)=>(
+            <Icon active name="logo-googleplus" />
+            <Text>Name Brand quantity Price</Text>
+            <Right>
+              <Icon name="arrow-forward" />
+            </Right>
+          </CardItem>
+          {cart.map((cart, i) => (
             <CardItem key={i}>
               <Icon active name="logo-googleplus" />
-              <Text>`${cart.name} ${cart.brand} ${cart.quantity} ${cart.price}`</Text>
+              <Text>
+                `${cart.name} ${cart.brand} ${cart.quantity} ${cart.price}`
+              </Text>
               <Right>
                 <Icon name="arrow-forward" />
               </Right>
-             </CardItem>
-            ))}
-           </Card>
-        </Content>
-      </Container>
-    )
+            </CardItem>
+          ))}
+        </Card>
+      </Content>
+    </Container>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -18,7 +18,7 @@ import {
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function ProductDetailScreen({ route, navigation }) {
+export default function ProductDetailScreen({ route, navigation, props }) {
   const [cart, setCart] = useState([]);
   const [itemCount, setItemCount] = useState(0);
   const [product, setProduct] = useState({});
@@ -98,7 +98,7 @@ export default function ProductDetailScreen({ route, navigation }) {
   //   );
   async function btnClicked(product) {
     if (
-      myQuantity <= 0 ||
+      myQuantity <= "0" ||
       myQuantity + itemCount > product.quantity - orderedQuantity
     ) {
       alert("Invalid quantity or quantity more than availabe in stock");
@@ -147,11 +147,14 @@ export default function ProductDetailScreen({ route, navigation }) {
         <Button primary onPress={increment}>
           <Text>+</Text>
         </Button>
-        <Input value={myQuantity} onChangeText={(value) => setMyQuantity(value)} />
+        <Input
+          value={JSON.stringify(myQuantity)}
+          onChangeText={(value) => setMyQuantity(value)}
+        />
         <Button primary onPress={decrement}>
           <Text>-</Text>
         </Button>
-        <Button primary onPress={btnClicked}>
+        <Button primary onPress={() => btnClicked(product)}>
           <Text> Add to Cart </Text>
         </Button>
       </Content>
