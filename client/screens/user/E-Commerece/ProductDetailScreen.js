@@ -26,12 +26,11 @@ export default function ProductDetailScreen({ route, navigation, props }) {
   const [myQuantity, setMyQuantity] = useState(1);
 
   useEffect(() => {
-    console.log(route.params.id);
     async function fetchData() {
       const token = await AsyncStorage.getItem("auth-token");
       axios
         .get("http://10.0.2.2:5002/products/get/" + route.params.id, {
-          headers: { "x-auth-token": token },
+          headers: { "x-auth-token": JSON.parse(token) },
         })
         .then((res) => {
           setProduct(res.data);
@@ -98,7 +97,7 @@ export default function ProductDetailScreen({ route, navigation, props }) {
   //   );
   async function btnClicked(product) {
     if (
-      myQuantity <= "0" ||
+      myQuantity <= 0 ||
       myQuantity + itemCount > product.quantity - orderedQuantity
     ) {
       alert("Invalid quantity or quantity more than availabe in stock");
