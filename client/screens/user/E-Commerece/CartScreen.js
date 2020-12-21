@@ -40,7 +40,7 @@ export default function CartScreen({ navigation }) {
       const token = await AsyncStorage.getItem("auth-token");
       const response = await axios.get(
         "http://10.0.2.2:5002/orders/getById/" +
-          localStorage.getItem("item-id"),
+          (await AsyncStorage.getItem("item-id")),
         { headers: { "x-auth-token": JSON.parse(token) } }
       );
       setOrderedQuantity(response.data.quantity);
