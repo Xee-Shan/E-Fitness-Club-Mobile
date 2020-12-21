@@ -94,9 +94,6 @@ export default function ProductDetailScreen({ route, navigation }) {
   //     { cancelable: false }
   //   );
   async function btnClicked(product) {
-    console.log(myQuantity);
-    console.log(product.quantity);
-    console.log(orderedQuantity);
 
     if (
       myQuantity <= 0 ||
