@@ -94,7 +94,6 @@ router.post("/register", async (req, res) => {
       role,
       address,
     });
-    console.log(req.body);
     newUser.save((err, doc) => {
       if (err) {
         return res.status(400).json({ success: false });
@@ -289,6 +288,7 @@ router.delete("/delete/employee/:id", auth, admin, async (req, res) => {
 //add to Cart
 router.post("/addToCart/:myQuantity", async (req, res) => {
   const myQuantity = req.params.myQuantity;
+  console.log(User.findOne({_id:req.user}));
   User.findOne({ _id: req.user }, (err, userInfo) => {
     let duplicate = false;
     let flag = 0;
