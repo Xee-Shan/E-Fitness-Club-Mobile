@@ -352,7 +352,7 @@ router.get("/getCart", auth, async (req, res) => {
 });
 
 //remove from cart
-router.delete("/removeFromCart/:id", async (req, res) => {
+router.delete("/removeFromCart/:id",auth, async (req, res) => {
   // User.findOneAndUpdate(
   //   {_id:req.user},
   //   {"$pull":
