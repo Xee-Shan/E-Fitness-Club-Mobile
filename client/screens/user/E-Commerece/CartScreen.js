@@ -41,7 +41,7 @@ export default function CartScreen({ navigation }) {
       const token = await AsyncStorage.getItem("auth-token");
       const response = await axios.get(
         "http://10.0.2.2:5002/orders/getById/" +
-          JSON.parse(itemId),
+          itemId,
         { headers: { "x-auth-token": JSON.parse(token) } }
       );
       setOrderedQuantity(response.data.quantity);
@@ -76,7 +76,7 @@ export default function CartScreen({ navigation }) {
   useEffect(() => {
     async function fetchData() {
       const itemId = await AsyncStorage.getItem("item-id");
-      axios.get("http://10.0.2.2:5002/products/get/" + JSON.parse(itemId)).then((res) => {
+      axios.get("http://10.0.2.2:5002/products/get/" + itemId).then((res) => {
         setProduct(res.data);
       });
     }
@@ -94,10 +94,9 @@ export default function CartScreen({ navigation }) {
 
   async function handleOrder() {
     const itemId = await AsyncStorage.getItem("item-id");
-    JSON.parse(itemId);
     console.log(typeof itemId);
     if (cart?.length > 0) {
-      const item = cart.find((arr) => arr.id === JSON.parse(itemId));
+      const item = cart.find((arr) => arr.id === itemId);
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");
         axios.post("http://10.0.2.2:5002/orders/placeOrder", cart, {
