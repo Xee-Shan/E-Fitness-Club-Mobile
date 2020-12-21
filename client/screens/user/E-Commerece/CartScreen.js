@@ -11,7 +11,7 @@ import {
   Right,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-export default function CartScreen() {
+export default function CartScreen({navigation}) {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [orderedQuantity, setOrderedQuantity] = useState();
@@ -86,6 +86,7 @@ export default function CartScreen() {
     axios.delete("http://10.0.2.2:5002/users/removeFromCart/" + id, {
       headers: { "x-auth-token": JSON.parse(token) },
     });
+    navigation.navigate("Cart");
     //window.location.reload();
   }
 
@@ -109,6 +110,7 @@ export default function CartScreen() {
         axios.delete("http://10.0.2.2:5002/users/removeFromCart/" + item.id, {
           headers: { "x-auth-token": JSON.parse(token) },
         });
+        navigation.navigate("Cart");
         // window.location.reload();
       }
     } else {
@@ -134,11 +136,17 @@ export default function CartScreen() {
                 `${cart.name} ${cart.brand} ${cart.quantity} ${cart.price}`
               </Text>
               <Right>
-                <Icon name="arrow-forward" />
+              <Button primary onPress={() => handleRemove(cart.id)}>
+            <Text> Remove </Text>
+          </Button>
               </Right>
             </CardItem>
           ))}
         </Card>
+        <Text>Total Amount : ${total}</Text>
+        <Button primary onPress={() =>handleOrder()}>
+            <Text> Place Order </Text>
+          </Button>
       </Content>
     </Container>
   );
