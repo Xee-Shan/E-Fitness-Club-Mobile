@@ -286,12 +286,11 @@ router.delete("/delete/employee/:id", auth, admin, async (req, res) => {
 });
 
 //add to Cart
-router.post("/addToCart/:myQuantity",auth, async (req, res) => {
-  const myQuantity = req.params.myQuantity;
+router.post("/addToCart/:myQuantity", auth, async (req, res) => {
+  const myQuantity = Number(req.params.myQuantity);
   User.findOne({ _id: req.user }, (err, userInfo) => {
     let duplicate = false;
     let flag = 0;
-    console.log(userInfo);
     userInfo.cart.map((cartInfo) => {
       if (cartInfo.id === req.body._id) {
         duplicate = true;
@@ -306,16 +305,19 @@ router.post("/addToCart/:myQuantity",auth, async (req, res) => {
       }
     });
     if (duplicate && flag === 0) {
+      console.log(req.user);
       User.findOneAndUpdate(
         { _id: req.user, "cart.id": req.body._id },
         { $inc: { "cart.$.quantity": myQuantity } },
         { new: true },
         (err, userInfo) => {
           if (err) return res.json({ success: false, err });
+          console.log(flag);
           res.status(200).json(userInfo.cart.quantity);
         }
       );
     } else if (flag === 0) {
+      console.log(flag);
       User.findByIdAndUpdate(
         { _id: req.user },
         {
@@ -342,8 +344,7 @@ router.post("/addToCart/:myQuantity",auth, async (req, res) => {
 });
 
 //get cart
-router.get("/getCart", auth,async (req, res) => {
-  console.log("hello Osama");
+router.get("/getCart", auth, async (req, res) => {
   const user = await User.findById(req.user);
   res.send(user.cart);
 });

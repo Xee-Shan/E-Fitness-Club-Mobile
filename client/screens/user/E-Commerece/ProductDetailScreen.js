@@ -28,7 +28,7 @@ export default function ProductDetailScreen({ route, navigation }) {
   useEffect(() => {
     async function fetchData() {
       const token = await AsyncStorage.getItem("auth-token");
-      console.log(token);
+
       axios
         .get("http://10.0.2.2:5002/products/get/" + route.params.id, {
           headers: { "x-auth-token": JSON.parse(token) },
@@ -42,7 +42,6 @@ export default function ProductDetailScreen({ route, navigation }) {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("Zeeshan Handsome boy");
       const token = await AsyncStorage.getItem("auth-token");
       const response = await axios.get(
         "http://10.0.2.2:5002/orders/getById/" + route.params.id,
@@ -56,8 +55,6 @@ export default function ProductDetailScreen({ route, navigation }) {
   useEffect(() => {
     async function fetchData() {
       const token = await AsyncStorage.getItem("auth-token");
-      console.log(AsyncStorage.getItem("auth-token"));
-      console.log("Zeeshan Hero");
       const res = await axios.get("http://10.0.2.2:5002/users/getCart", {
         headers: { "x-auth-token": JSON.parse(token) },
       });
@@ -97,6 +94,10 @@ export default function ProductDetailScreen({ route, navigation }) {
   //     { cancelable: false }
   //   );
   async function btnClicked(product) {
+    console.log(myQuantity);
+    console.log(product.quantity);
+    console.log(orderedQuantity);
+
     if (
       myQuantity <= 0 ||
       myQuantity + itemCount > product.quantity - orderedQuantity
@@ -106,11 +107,10 @@ export default function ProductDetailScreen({ route, navigation }) {
       if (product.quantity - orderedQuantity > 0) {
         const token = await AsyncStorage.getItem("auth-token");
         const response = await axios.post(
-          "http://10.0.2.2:5002/users/addToCart/" + JSON.parse(myQuantity),
+          "http://10.0.2.2:5002/users/addToCart/" + myQuantity,
           product,
           { headers: { "x-auth-token": JSON.parse(token) } }
         );
-        console.log(response.data);
         if (response.data !== "") {
           alert("Out of Stock : Item quantity more than " + response.data);
         } else {
