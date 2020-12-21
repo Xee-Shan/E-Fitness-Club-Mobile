@@ -366,6 +366,7 @@ router.delete("/removeFromCart/:id", async (req, res) => {
   const arr = user.cart.filter((cart) => {
     return cart.id !== req.params.id;
   });
+  console.log(arr);
   user.cart = arr;
   await user.save();
 });
