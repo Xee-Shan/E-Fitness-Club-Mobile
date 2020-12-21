@@ -288,6 +288,7 @@ router.delete("/delete/employee/:id", auth, admin, async (req, res) => {
 
 //add to Cart
 router.post("/addToCart/:myQuantity", async (req, res) => {
+  console.log(req.params.myQuantity);
   const myQuantity = Number(req.params.myQuantity);
   User.findOne({ _id: req.user }, (err, userInfo) => {
     let duplicate = false;
