@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { StyleSheet, Text, View } from "react-native";
 import {
   Container,
@@ -25,12 +26,13 @@ export default function CartScreen() {
           headers: { "x-auth-token": JSON.parse(token) },
         })
         .then((res) => {
+          console.log(res.data);
           setCart(res.data);
           AsyncStorage.setItem("item-count", res.data.length);
         });
     }
     fetchData();
-  }, [cart]);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,7 +45,7 @@ export default function CartScreen() {
       setOrderedQuantity(response.data.quantity);
     }
     fetchData();
-  });
+  }, []);
 
   /*
   useEffect(()=>{
@@ -60,7 +62,7 @@ export default function CartScreen() {
     if (cart?.length >= 0) {
       calculate(cart);
     }
-  });
+  }, []);
   function calculate(cart) {
     let amount = 0;
     cart.map((cart) => {
@@ -77,7 +79,7 @@ export default function CartScreen() {
       });
     }
     fetchData();
-  });
+  }, []);
 
   async function handleRemove(id) {
     const token = await AsyncStorage.getItem("auth-token");

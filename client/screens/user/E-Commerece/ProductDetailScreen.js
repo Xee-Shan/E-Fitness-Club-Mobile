@@ -18,7 +18,7 @@ import {
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function ProductDetailScreen({ route, navigation, props }) {
+export default function ProductDetailScreen({ route, navigation }) {
   const [cart, setCart] = useState([]);
   const [itemCount, setItemCount] = useState(0);
   const [product, setProduct] = useState({});
@@ -28,6 +28,7 @@ export default function ProductDetailScreen({ route, navigation, props }) {
   useEffect(() => {
     async function fetchData() {
       const token = await AsyncStorage.getItem("auth-token");
+      console.log(token);
       axios
         .get("http://10.0.2.2:5002/products/get/" + route.params.id, {
           headers: { "x-auth-token": JSON.parse(token) },
@@ -41,6 +42,7 @@ export default function ProductDetailScreen({ route, navigation, props }) {
 
   useEffect(() => {
     async function fetchData() {
+      console.log("Zeeshan Handsome boy");
       const token = await AsyncStorage.getItem("auth-token");
       const response = await axios.get(
         "http://10.0.2.2:5002/orders/getById/" + route.params.id,
@@ -54,22 +56,20 @@ export default function ProductDetailScreen({ route, navigation, props }) {
   useEffect(() => {
     async function fetchData() {
       const token = await AsyncStorage.getItem("auth-token");
-      await axios
-        .get("http://10.0.2.2:5002/users/getCart", {
-          headers: { "x-auth-token": JSON.parse(token) },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setCart(res.data);
-          if (cart.length > 0) {
-            const item = cart.find((arr) => arr.id === route.params.id);
-            setItemCount(item?.quantity);
-          }
-          AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
-        });
+      console.log(AsyncStorage.getItem("auth-token"));
+      console.log("Zeeshan Hero");
+      const res = await axios.get("http://10.0.2.2:5002/users/getCart", {
+        headers: { "x-auth-token": JSON.parse(token) },
+      });
+      setCart(res.data);
+      if (cart.length > 0) {
+        const item = cart.find((arr) => arr.id === route.params.id);
+        setItemCount(item?.quantity);
+      }
+      AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
     }
     fetchData();
-  }, [cart, route.params.id]);
+  }, []);
 
   // const onChangeMyQuantity = (e) => {
   //   setMyQuantity(e.target.value);
@@ -110,10 +110,11 @@ export default function ProductDetailScreen({ route, navigation, props }) {
           product,
           { headers: { "x-auth-token": JSON.parse(token) } }
         );
+        console.log(response.data);
         if (response.data !== "") {
           alert("Out of Stock : Item quantity more than " + response.data);
         } else {
-          navigation.navigate("CartScreen");
+          navigation.navigate("Cart");
           await AsyncStorage.setItem("item-id", product._id);
           //window.location.reload();
         }
