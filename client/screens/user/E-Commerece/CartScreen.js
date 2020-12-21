@@ -37,10 +37,11 @@ export default function CartScreen({ navigation }) {
 
   useEffect(() => {
     async function fetchData() {
+      const itemId=await AsyncStorage.getItem("item-id");
       const token = await AsyncStorage.getItem("auth-token");
       const response = await axios.get(
         "http://10.0.2.2:5002/orders/getById/" +
-          (await AsyncStorage.getItem("item-id")),
+          JSON.parse(itemId),
         { headers: { "x-auth-token": JSON.parse(token) } }
       );
       setOrderedQuantity(response.data.quantity);
