@@ -342,7 +342,7 @@ router.post("/addToCart/:myQuantity",auth, async (req, res) => {
 });
 
 //get cart
-router.get("/getCart", async (req, res) => {
+router.get("/getCart", auth,async (req, res) => {
   const user = await User.findById(req.user);
   res.send(user.cart);
 });
