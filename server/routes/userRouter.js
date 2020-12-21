@@ -323,7 +323,7 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
           if (cart.id === req.body._id) {
             console.log(myQuantity);
             console.log(cart.quantity);
-            cart.quantity=+myQuantity+cart.quantity;
+            cart.quantity=myQuantity+(+cart.quantity);
             console.log(cart.quantity);
           }
         });
