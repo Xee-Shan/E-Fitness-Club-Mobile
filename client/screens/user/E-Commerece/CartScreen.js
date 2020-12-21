@@ -76,7 +76,7 @@ export default function CartScreen({ navigation }) {
   useEffect(() => {
     async function fetchData() {
       const itemId = await AsyncStorage.getItem("item-id");
-      axios.get("http://10.0.2.2:5002/products/get/" + itemId).then((res) => {
+      axios.get("http://10.0.2.2:5002/products/get/" + JSON.parse(itemId)).then((res) => {
         setProduct(res.data);
       });
     }
