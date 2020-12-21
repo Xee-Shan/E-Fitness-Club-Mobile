@@ -10,6 +10,7 @@ import {
   CardItem,
   Text,
   Button,
+  Input,
   Icon,
   Left,
   Body,
@@ -139,22 +140,20 @@ export default function ProductDetailScreen({ route, navigation }) {
               Price : ${product.price}
               Brand : ${product.brand}
               Description : ${product.description}
-              Available: ${product.quantity-orderedQuantity}
+              Available: ${product.quantity - orderedQuantity}
             `}</Text>
           </CardItem>
-          </Card>
-          <Button primary onPress={increment}>
-              <Text>+</Text>
-            </Button>
-            <Input
-              onChangeText={(value) => setMyQuantity(value)}
-            />
-            <Button primary onPress={decrement}>
-              <Text>-</Text>
-            </Button>
-          <Button primary onPress={btnClicked}>
-              <Text> Add to Cart </Text>
-            </Button>
+        </Card>
+        <Button primary onPress={increment}>
+          <Text>+</Text>
+        </Button>
+        <Input onChangeText={(value) => setMyQuantity(value)} />
+        <Button primary onPress={decrement}>
+          <Text>-</Text>
+        </Button>
+        <Button primary onPress={btnClicked}>
+          <Text> Add to Cart </Text>
+        </Button>
       </Content>
     </Container>
   );
