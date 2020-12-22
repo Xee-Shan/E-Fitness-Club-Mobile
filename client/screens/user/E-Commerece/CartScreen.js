@@ -27,25 +27,25 @@ export default function CartScreen({ navigation }) {
           headers: { "x-auth-token": JSON.parse(token) },
         })
         .then((res) => {
-          console.log(res.data);
           setCart(res.data);
           AsyncStorage.setItem("item-count", JSON.stringify(res.data.length));
         });
     }
     fetchData();
-  },[]);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
-      const itemId=await AsyncStorage.getItem("item-id");
+      const itemId = await AsyncStorage.getItem("item-id");
       const token = await AsyncStorage.getItem("auth-token");
+      Number(itemId);
+      console.log(typeof itemId);
       const response = await axios.get(
-        "http://10.0.2.2:5002/orders/getById/" +
-          itemId,
+        "http://10.0.2.2:5002/orders/getById/" + itemId,
         { headers: { "x-auth-token": JSON.parse(token) } }
       );
-      console.log(itemId);
-      console.log(response.data);
+      // console.log(itemId);
+      // console.log(response.data);
       setOrderedQuantity(response.data.quantity);
     }
     fetchData();
@@ -66,7 +66,7 @@ export default function CartScreen({ navigation }) {
     if (cart?.length >= 0) {
       calculate(cart);
     }
-  }, []);
+  });
   function calculate(cart) {
     let amount = 0;
     cart.map((cart) => {
@@ -98,10 +98,10 @@ export default function CartScreen({ navigation }) {
     const itemId = await AsyncStorage.getItem("item-id");
     if (cart?.length > 0) {
       const item = cart.find((arr) => arr.id === itemId);
-      console.log(item);
-      console.log(typeof item.quantity);
-      console.log(typeof product.quantity);
-      console.log(typeof orderedQuantity);
+      // console.log(item);
+      // console.log(typeof item.quantity);
+      // console.log(typeof product.quantity);
+      // console.log(typeof orderedQuantity);
 
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");

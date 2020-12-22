@@ -314,8 +314,7 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
           if (err) {
             console.log(err);
             return res.json({ success: false, err });
-        
-        }
+          }
           res.status(200).json(userInfo.cart.quantity);
         }
       );
@@ -352,7 +351,7 @@ router.get("/getCart", auth, async (req, res) => {
 });
 
 //remove from cart
-router.delete("/removeFromCart/:id",auth, async (req, res) => {
+router.delete("/removeFromCart/:id", auth, async (req, res) => {
   // User.findOneAndUpdate(
   //   {_id:req.user},
   //   {"$pull":
@@ -362,11 +361,9 @@ router.delete("/removeFromCart/:id",auth, async (req, res) => {
   // )
 
   const user = await User.findByIdAndUpdate(req.user);
-  console.log("cart ID : "+req.params.id);
   const arr = user.cart.filter((cart) => {
     return cart.id !== req.params.id;
   });
-  console.log(arr);
   user.cart = arr;
   await user.save();
 });

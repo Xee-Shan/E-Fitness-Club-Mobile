@@ -29,3 +29,4 @@ app.use("/users", require("./routes/userRouter"));
 app.use("/products", require("./routes/productRouter"));
 app.use("/trainings", require("./routes/trainingRouter"));
 app.use("/blogs", require("./routes/blogRouter"));
+app.use("/orders", require("./routes/orderRouter"));
