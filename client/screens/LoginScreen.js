@@ -37,6 +37,7 @@ export default function LoginScreen(props) {
     <Container>
       <Header />
       <Content>
+        <Text style={style.logText}>Log In</Text>
         <Form>
           <Item floatingLabel>
             <Label>Email</Label>
@@ -62,12 +63,19 @@ export default function LoginScreen(props) {
 
 const style = StyleSheet.create({
   button: {
-    marginLeft: "32%",
+    marginLeft: "30%",
     marginTop: "10%",
     padding: "10%",
   },
   text: {
     color: "white",
     textAlign: "center",
+    fontSize:20,
+  },
+  logText:{
+    fontWeight:"bold",
+    fontSize:40,
+    textAlign:"center",
+    marginTop:"30%",
   },
 });
