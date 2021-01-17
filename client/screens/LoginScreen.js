@@ -9,7 +9,7 @@ import {
   Label,
   Button,
 } from "native-base";
-import { Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Axios from "axios";
 
@@ -50,8 +50,8 @@ export default function LoginScreen(props) {
             />
           </Item>
           <Item>
-            <Button primary onPress={btnClicked}>
-              <Text> Login </Text>
+            <Button primary onPress={btnClicked} style={style.button}>
+              <Text style={style.text}> Login </Text>
             </Button>
           </Item>
         </Form>
@@ -59,3 +59,15 @@ export default function LoginScreen(props) {
     </Container>
   );
 }
+
+const style = StyleSheet.create({
+  button: {
+    marginLeft: "32%",
+    marginTop: "10%",
+    padding: "10%",
+  },
+  text: {
+    color: "white",
+    textAlign: "center",
+  },
+});

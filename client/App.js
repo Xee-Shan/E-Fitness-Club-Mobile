@@ -16,8 +16,8 @@ import BlogScreen from "./screens/user/Blogs/Blog";
 import ProductDetailScreen from "./screens/user/E-Commerece/ProductDetailScreen";
 import CartScreen from "./screens/user/E-Commerece/CartScreen";
 import RecipeScreen from "./screens/user/Nutrition/Recipe";
-import DietPlanScreen from "./screens/user/Nutrition/DietPlan"
-
+import DietPlanScreen from "./screens/user/Nutrition/DietPlan";
+import { StyleSheet } from "react-native";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,7 +29,7 @@ const HomeTabs = () => {
       <Tab.Screen name="About" component={AboutScreen} />
       <Tab.Screen name="Contact" component={ContactScreen} />
       <Tab.Screen name="SignUp" component={SignUpScreen} />
-      <Tab.Screen name="Login" component={LoginScreen} />
+      <Tab.Screen name="Login" component={LoginScreen} style={style.tab} />
     </Tab.Navigator>
   );
 };
@@ -40,8 +40,8 @@ const UserDrawer = () => {
       <Drawer.Screen name="Product" component={ProductScreen} />
       <Drawer.Screen name="Program" component={ProgramScreen} />
       <Drawer.Screen name="Blogs" component={BlogScreen} />
-      <Drawer.Screen name="Recipes" component={RecipeScreen}/>
-      <Drawer.Screen name="Diet Plans" component={DietPlanScreen}/>
+      <Drawer.Screen name="Recipes" component={RecipeScreen} />
+      <Drawer.Screen name="Diet Plans" component={DietPlanScreen} />
       <Drawer.Screen name="Cart" component={CartScreen} />
     </Drawer.Navigator>
   );
@@ -54,7 +54,11 @@ const App = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="UserAccount" component={UserDrawer} />
-        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen
+          name="ProductDetail"
+          component={ProductDetailScreen}
+          style={style.tab}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -71,3 +75,9 @@ const styles = StyleSheet.create({
   },
 });
 */
+
+const style = StyleSheet.create({
+  tab: {
+    width: "15%",
+  },
+});
