@@ -27,7 +27,7 @@ const HomeTabs = () => {
     <Tab.Navigator
       tabBarOptions={{
         style: {
-          backgroundColor: "#0A60FF",
+          backgroundColor: "#01004C",
         },
         labelStyle: {
           textAlign: "center",
