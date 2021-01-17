@@ -15,6 +15,8 @@ import ProgramScreen from "./screens/user/Training System/Program";
 import BlogScreen from "./screens/user/Blogs/Blog";
 import ProductDetailScreen from "./screens/user/E-Commerece/ProductDetailScreen";
 import CartScreen from "./screens/user/E-Commerece/CartScreen";
+import RecipeScreen from "./screens/user/Nutrition/Recipe";
+import DietPlanScreen from "./screens/user/Nutrition/DietPlan"
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -38,6 +40,8 @@ const UserDrawer = () => {
       <Drawer.Screen name="Product" component={ProductScreen} />
       <Drawer.Screen name="Program" component={ProgramScreen} />
       <Drawer.Screen name="Blogs" component={BlogScreen} />
+      <Drawer.Screen name="Recipes" component={RecipeScreen}/>
+      <Drawer.Screen name="Diet Plans" component={DietPlanScreen}/>
       <Drawer.Screen name="Cart" component={CartScreen} />
     </Drawer.Navigator>
   );
