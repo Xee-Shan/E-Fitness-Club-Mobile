@@ -37,7 +37,6 @@ export default function LoginScreen(props) {
     <Container>
       <Header />
       <Content>
-        <Text style={style.logText}>Log In</Text>
         <Form>
           <Item floatingLabel>
             <Label>Email</Label>
@@ -63,13 +62,16 @@ export default function LoginScreen(props) {
 
 const style = StyleSheet.create({
   button: {
-    marginLeft: "30%",
+    marginLeft: "32%",
     marginTop: "10%",
     padding: "10%",
   },
   text: {
     color: "white",
     textAlign: "center",
+<<<<<<< HEAD
     fontSize: 20,
+=======
+>>>>>>> parent of c3cf4be... tjth
   },
 });

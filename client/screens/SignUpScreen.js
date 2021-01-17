@@ -48,7 +48,6 @@ export default function SignUpScreen(props) {
     <Container>
       <Header />
       <Content>
-        <Text style={style.regText}>Sign Up</Text>
         <Form>
           <Item floatingLabel>
             <Label>Name</Label>
@@ -69,12 +68,11 @@ export default function SignUpScreen(props) {
               onChangeText={(value) => setPassword(value)}
             />
           </Item>
-          <Item floatingLabel >
+          <Item floatingLabel>
             <Label>Confirm Password</Label>
             <Input
               secureTextEntry={true}
               onChangeText={(value) => setPasswordCheck(value)}
-              style={style.Label}
             />
           </Item>
           <Item>
@@ -97,8 +95,8 @@ export default function SignUpScreen(props) {
             <Input onChangeText={(value) => setAddress(value)} />
           </Item>
           <Item>
-            <Button primary onPress={btnClicked} style={style.button}>
-              <Text style={style.text}> Sign Up </Text>
+            <Button primary onPress={btnClicked}>
+              <Text> Sign Up </Text>
             </Button>
           </Item>
         </Form>
@@ -107,23 +105,4 @@ export default function SignUpScreen(props) {
   );
 }
 
-const style = StyleSheet.create({
-  Label:{
-    marginBottom:"10%",
-  },
-  button: {
-    marginLeft: "28%",
-    marginTop: "10%",
-    padding: "10%",
-  },
-  text: {
-    color: "white",
-    textAlign: "center",
-    fontSize:20,
-  },
-  regText:{
-    fontWeight:"bold",
-    fontSize:40,
-    textAlign:"center",
-  }
-});
+const styles = StyleSheet.create({});
