@@ -4,21 +4,36 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 export default function SplashScreen({ navigation }) {
   return (
     <View>
-      <Text>E-Fitness Club</Text>
+      <Text style={style.text}>E-Fitness Club</Text>
       <TouchableOpacity
-        style={styles.button}
+        style={style.button}
         onPress={() => navigation.navigate("Home")}
       >
-        <Text>Click Me</Text>
+        <Text style={style.text2}>Click Here To Login</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
+  text: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 40,
+    marginTop: 220,
+  },
+
   button: {
-    flexDirection: "row",
-    backgroundColor: "black",
-    width: "15%",
+    backgroundColor: "blue",
+    padding: 25,
+    color: "white",
+    fontWeight: "bold",
+  },
+
+  text2: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });

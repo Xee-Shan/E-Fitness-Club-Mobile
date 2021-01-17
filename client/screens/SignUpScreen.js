@@ -48,6 +48,7 @@ export default function SignUpScreen(props) {
     <Container>
       <Header />
       <Content>
+        <Text style={style.regText}>Register</Text>
         <Form>
           <Item floatingLabel>
             <Label>Name</Label>
@@ -76,11 +77,10 @@ export default function SignUpScreen(props) {
             />
           </Item>
           <Item>
-            <Label>Gender</Label>
             <Picker
               selectedValue={gender}
-              style={{ height: 50, width: 150 }}
               onValueChange={(itemValue) => setGender(itemValue)}
+              style={style.picker}
             >
               <Picker.Item label="Male" value="Male" />
               <Picker.Item label="Female" value="Female" />
@@ -95,8 +95,8 @@ export default function SignUpScreen(props) {
             <Input onChangeText={(value) => setAddress(value)} />
           </Item>
           <Item>
-            <Button primary onPress={btnClicked}>
-              <Text> Sign Up </Text>
+            <Button primary onPress={btnClicked} style={style.button}>
+              <Text style={style.text}>Register</Text>
             </Button>
           </Item>
         </Form>
@@ -105,4 +105,24 @@ export default function SignUpScreen(props) {
   );
 }
 
-const styles = StyleSheet.create({});
+const style = StyleSheet.create({
+  button: {
+    marginLeft: 125,
+    marginTop: 30,
+    padding: 20,
+  },
+  text: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  regText: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 40,
+  },
+  picker: {
+    marginTop: 30,
+  },
+});

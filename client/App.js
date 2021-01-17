@@ -24,12 +24,25 @@ const Tab = createBottomTabNavigator();
 
 const HomeTabs = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Navigator
+      tabBarOptions={{
+        style: {
+          backgroundColor: "#0A60FF",
+        },
+        labelStyle: {
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: 20,
+          color: "white",
+          marginBottom: 10,
+        },
+      }}
+    >
+      {/* <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="About" component={AboutScreen} />
-      <Tab.Screen name="Contact" component={ContactScreen} />
-      <Tab.Screen name="SignUp" component={SignUpScreen} />
-      <Tab.Screen name="Login" component={LoginScreen} style={style.tab} />
+      <Tab.Screen name="Contact" component={ContactScreen} /> */}
+      <Tab.Screen name="Login" component={LoginScreen} />
+      <Tab.Screen name="Register" component={SignUpScreen} />
     </Tab.Navigator>
   );
 };
@@ -54,30 +67,10 @@ const App = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="UserAccount" component={UserDrawer} />
-        <Stack.Screen
-          name="ProductDetail"
-          component={ProductDetailScreen}
-          style={style.tab}
-        />
+        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default App;
-/*
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-*/
-
-const style = StyleSheet.create({
-  tab: {
-    width: "15%",
-  },
-});
