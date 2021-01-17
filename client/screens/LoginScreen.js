@@ -62,12 +62,13 @@ export default function LoginScreen(props) {
 
 const style = StyleSheet.create({
   button: {
-    marginLeft: "32%",
+    marginLeft: "30%",
     marginTop: "10%",
     padding: "10%",
   },
   text: {
     color: "white",
     textAlign: "center",
+    fontSize: 20,
   },
 });
