@@ -5,10 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import SplashScreen from "./screens/SplashScreen";
-import HomeScreen from "./screens/HomeScreen";
+// import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
-import AboutScreen from "./screens/AboutScreen";
-import ContactScreen from "./screens/ContactScreen";
+// import AboutScreen from "./screens/AboutScreen";
+// import ContactScreen from "./screens/ContactScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import ProductScreen from "./screens/user/E-Commerece/ProductScreen";
 import ProgramScreen from "./screens/user/Training System/Program";
@@ -25,11 +25,11 @@ const Tab = createBottomTabNavigator();
 const HomeTabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      {/* <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="About" component={AboutScreen} />
-      <Tab.Screen name="Contact" component={ContactScreen} />
-      <Tab.Screen name="SignUp" component={SignUpScreen} />
+      <Tab.Screen name="Contact" component={ContactScreen} /> */}
       <Tab.Screen name="Login" component={LoginScreen} style={style.tab} />
+      <Tab.Screen name="SignUp" component={SignUpScreen} />
     </Tab.Navigator>
   );
 };
@@ -80,4 +80,5 @@ const style = StyleSheet.create({
   tab: {
     width: "15%",
   },
+  
 });

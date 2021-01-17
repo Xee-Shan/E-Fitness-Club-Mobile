@@ -37,6 +37,7 @@ export default function LoginScreen(props) {
     <Container>
       <Header />
       <Content>
+        <Text style={style.logText}>Log In</Text>
         <Form>
           <Item floatingLabel>
             <Label>Email</Label>
