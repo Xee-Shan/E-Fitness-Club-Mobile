@@ -25,7 +25,6 @@ export default function ProgramDetailScreen({ route }) {
         headers: { "x-auth-token": JSON.parse(token) },
       }
     );
-    console.log(res.data);
     setProgram(res.data);
   };
 
@@ -37,7 +36,7 @@ export default function ProgramDetailScreen({ route }) {
     <Container>
       <Header />
       <Content>
-        <Text>{program?.title}</Text>
+        <Text style={style.Heading}>{program?.title}</Text>
         <Card>
           <CardItem cardBody>
             <Image
@@ -46,6 +45,7 @@ export default function ProgramDetailScreen({ route }) {
             />
           </CardItem>
         </Card>
+        <Text style={style.Heading1}>Description</Text>
         <Text>{program?.description}</Text>
         {program?.exercise?.map((data, i) => {
           return (
@@ -83,3 +83,15 @@ export default function ProgramDetailScreen({ route }) {
     </Container>
   );
 }
+
+const style = new StyleSheet.create({
+  Heading:{
+    fontSize:30,
+    fontWeight:"bold",
+    textAlign:"center",
+  },
+  Heading1:{
+    fontSize:20,
+    fontWeight:"bold",
+  },
+});
