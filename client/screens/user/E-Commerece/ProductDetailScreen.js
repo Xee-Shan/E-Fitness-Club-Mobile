@@ -89,9 +89,6 @@ export default function ProductDetailScreen({ route, navigation }) {
   //     { cancelable: false }
   //   );
   async function btnClicked(product) {
-    console.log(typeof myQuantity);
-    console.log(typeof itemCount);
-    console.log(typeof orderedQuantity);
     if (
       myQuantity <= 0 ||
       myQuantity + itemCount > product.quantity - orderedQuantity
@@ -132,7 +129,9 @@ export default function ProductDetailScreen({ route, navigation }) {
           <CardItem>
             <Text>{`
               Name: ${product.name}
-              Price : ${product.price}
+              Price : ${product.price}(PKR)
+              Delivery Charges : ${product.deliveryCharges}(PKR)
+              Delivery Days : ${product.deliveryDays}
               Brand : ${product.brand}
               Description : ${product.description}
               Available: ${product.quantity - orderedQuantity}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
 import {
   Container,
   Header,
@@ -32,20 +32,18 @@ export default function CartScreen({ navigation }) {
         });
     }
     fetchData();
-  }, []);
+  }, [cart]);
 
   useEffect(() => {
     async function fetchData() {
       const itemId = await AsyncStorage.getItem("item-id");
       const token = await AsyncStorage.getItem("auth-token");
       Number(itemId);
-      console.log(typeof itemId);
       const response = await axios.get(
         "http://10.0.2.2:5002/orders/getById/" + itemId,
         { headers: { "x-auth-token": JSON.parse(token) } }
       );
-      // console.log(itemId);
-      // console.log(response.data);
+
       setOrderedQuantity(response.data.quantity);
     }
     fetchData();
@@ -70,10 +68,11 @@ export default function CartScreen({ navigation }) {
   function calculate(cart) {
     let amount = 0;
     cart.map((cart) => {
-      amount += cart.quantity * cart.price;
+      amount += cart.quantity * (cart.price + cart.deliveryCharges);
       return amount;
     });
     setTotal(amount);
+    console.log(cart.quantity);
   }
   useEffect(() => {
     async function fetchData() {
@@ -105,11 +104,10 @@ export default function CartScreen({ navigation }) {
 
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");
-        axios.post("http://10.0.2.2:5002/orders/placeOrder", cart, {
+        axios.post("http://10.0.2.2:5002/orders/placeOrder/" + total, cart, {
           headers: { "x-auth-token": JSON.parse(token) },
         });
         alert("Order placed successfully!!!");
-        //window.location.reload();
       } else {
         const token = await AsyncStorage.getItem("auth-token");
         alert(
@@ -160,5 +158,3 @@ export default function CartScreen({ navigation }) {
     </Container>
   );
 }
-
-const styles = StyleSheet.create({});
