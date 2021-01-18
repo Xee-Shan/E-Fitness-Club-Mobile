@@ -10,6 +10,7 @@ import {
   CardItem,
   Button,
   Input,
+  View,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -37,6 +38,32 @@ export default function ProgramDetailScreen({ route }) {
       <Header />
       <Content>
         <Text>{program?.title}</Text>
+        <Card>
+          <CardItem cardBody>
+            <Image
+              source={{ uri: program?.imageURL }}
+              style={{ height: 200, flex: 1 }}
+            />
+          </CardItem>
+        </Card>
+        <Text>{program?.description}</Text>
+        {program?.exercise?.map((data, i) => {
+          return (
+            <View key={i}>
+              <Text>{data.day}</Text>
+              <Text>{data.area}</Text>
+            </View>
+          );
+        })}
+        {program?.workoutList?.map((data, i) => {
+          return (
+            <View key={i}>
+              <Text>{data.exerciseName}</Text>
+              <Text>{data.reps}</Text>
+              <Text>{data.sets}</Text>
+            </View>
+          );
+        })}
         {/* {program?.map((data, i) => {
           return (
             <Card key={i}>
