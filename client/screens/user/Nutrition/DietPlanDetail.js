@@ -34,7 +34,7 @@ export default function DietPlanDetail({ route }) {
     <Container>
       <Header />
       <Content>
-        <Text>{dietPlan?.day}</Text>
+        <Text style={style.Heading}>{dietPlan?.day}</Text>
         <Card>
           <CardItem cardBody>
             <Image
@@ -43,10 +43,28 @@ export default function DietPlanDetail({ route }) {
             />
           </CardItem>
         </Card>
-        <Text>{dietPlan?.userType}</Text>
-        <Text>{dietPlan?.dietType}</Text>
+        <Text style={style.Heading1}>User Type</Text>
+        <Text style={style.margin}>{dietPlan?.userType}</Text>
+        <Text style={style.Heading1}>Diet Type</Text>
+        <Text style={style.margin}>{dietPlan?.dietType}</Text>
+        <Text style={style.Heading1}>Diet</Text>
         <HTML source={{ html: dietPlan?.diet }}/>
         </Content>
     </Container>
   );
 }
+
+const style = new StyleSheet.create({
+  Heading:{
+    fontSize:30,
+    fontWeight:"bold",
+    textAlign:"center",
+  },
+  Heading1:{
+    fontSize:20,
+    fontWeight:"bold",
+  },
+  margin:{
+    marginBottom:10,
+  },
+});

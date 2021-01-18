@@ -35,7 +35,7 @@ export default function RecipeDetailScreen({ route }) {
       <Header />
       <Content>
         <Text style={style.Heading}>{recipe?.name}</Text>
-        <Card>
+        <Card style={{marginBottom:10}}>
           <CardItem cardBody>
             <Image
               source={{ uri: recipe?.imageURL }}
@@ -43,18 +43,32 @@ export default function RecipeDetailScreen({ route }) {
             />
           </CardItem>
         </Card>
-        <Text>{recipe?.type}</Text>
-        <Text>{recipe?.category}</Text>
-        <Text>{recipe?.description}</Text>
-        <HTML source={{ html: recipe?.ingredients }}/>
-        <HTML source={{ html: recipe?.method }}/>
+        <Text style={style.Heading1}>Type</Text>
+        <Text style={style.margin}>{recipe?.type}</Text>
+        <Text style={style.Heading1}>Category</Text>
+        <Text style={style.margin}>{recipe?.category}</Text>
+        <Text style={style.Heading1}>Description</Text>
+        <Text style={style.margin}>{recipe?.description}</Text>
+        <Text style={style.Heading1}>Ingredients</Text>
+        <HTML source={{ html: recipe?.ingredients }} 
+              style={style.margin}/>
+        <Text style={style.Heading1}>Method</Text>
+        <HTML source={{ html: recipe?.method }} />
         </Content>
     </Container>
   );
 }
 const style = new StyleSheet.create({
   Heading:{
+    fontSize:30,
+    fontWeight:"bold",
+    textAlign:"center",
+  },
+  Heading1:{
     fontSize:20,
     fontWeight:"bold",
+  },
+  margin:{
+    marginBottom:10,
   },
 });
