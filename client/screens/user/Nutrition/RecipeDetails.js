@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { StyleSheet } from "react-native";
 import { Image, Text } from "react-native";
+import HTML from "react-native-render-html";
 import {
   Container,
   Header,
   Content,
   Card,
   CardItem,
-  Button,
-  Input,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -24,7 +23,6 @@ export default function RecipeDetailScreen({ route }) {
         headers: { "x-auth-token": JSON.parse(token) },
       }
     );
-    console.log(res.data);
     setRecipe(res.data);
   };
 
@@ -46,8 +44,11 @@ export default function RecipeDetailScreen({ route }) {
           </CardItem>
         </Card>
         <Text>{recipe?.type}</Text>
-        <Text>{recipe?.decsription}</Text>
-      </Content>
+        <Text>{recipe?.category}</Text>
+        <Text>{recipe?.description}</Text>
+        <HTML source={{ html: recipe?.ingredients }}/>
+        <HTML source={{ html: recipe?.method }}/>
+        </Content>
     </Container>
   );
 }

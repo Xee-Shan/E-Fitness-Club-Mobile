@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const recipeSchema = {
   name: String,
-  type: String,
-  ingredients: String,
+  tyredients: String,
+  descpe: String,
   description: String,
   method: String,
   imageName: String,

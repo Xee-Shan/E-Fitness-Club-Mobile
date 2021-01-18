@@ -98,10 +98,10 @@ export default function CartScreen({ navigation }) {
     const itemId = await AsyncStorage.getItem("item-id");
     if (cart?.length > 0) {
       const item = cart.find((arr) => arr.id === itemId);
-      // console.log(item);
-      // console.log(typeof item.quantity);
-      // console.log(typeof product.quantity);
-      // console.log(typeof orderedQuantity);
+      console.log(item);
+      console.log(typeof item.quantity);
+      console.log(typeof product.quantity);
+      console.log(typeof orderedQuantity);
 
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");

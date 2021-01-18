@@ -18,6 +18,7 @@ import CartScreen from "./screens/user/E-Commerece/CartScreen";
 import RecipeScreen from "./screens/user/Nutrition/Recipe";
 import RecipeDetailScreen from "./screens/user/Nutrition/RecipeDetails";
 import DietPlanScreen from "./screens/user/Nutrition/DietPlan";
+import DietPlanDetailScreen from "./screens/user/Nutrition/DietPlanDetail"
 import ProgramDetailScreen from "./screens/user/Training System/ProgramDetailScreen";
 import BlogDetailScreen from "./screens/user/Blogs/BlogDetailScreen";
 import { StyleSheet } from "react-native";
@@ -74,6 +75,7 @@ const App = () => {
         <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} />
         <Stack.Screen name="ProgramDetail" component={ProgramDetailScreen} />
         <Stack.Screen name="BlogDetailScreen" component={BlogDetailScreen} />
+        <Stack.Screen name="DietPlanDetailScreen" component={DietPlanDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

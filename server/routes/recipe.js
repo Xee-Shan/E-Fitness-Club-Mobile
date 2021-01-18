@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-//create product
+//create recipe
 router.post("/create", upload.single("image"), async (req, res) => {
   const recipe = new Recipe({
     name: req.body.name,
@@ -39,7 +39,7 @@ router.post("/create", upload.single("image"), async (req, res) => {
   });
 });
 
-//get product
+//get recipes
 router.get("/get", async (req, res) => {
   await Recipe.find((err, doc) => {
     if (err) res.status(400).send(err);
@@ -56,7 +56,7 @@ router.get("/get/:id", async (req, res) => {
   });
 });
 
-//delete product
+//delete recipe
 router.delete("/delete/:id", async (req, res) => {
   const recipe = await Recipe.findByIdAndDelete({ _id: req.params.id });
   fs.unlink(recipe.imagePath, (err) => {
@@ -65,7 +65,7 @@ router.delete("/delete/:id", async (req, res) => {
   });
 });
 
-//update product
+//update recipe
 router.put("/update/:id", async (req, res) => {
   const recipe = await Recipe.findByIdAndUpdate({ _id: req.params.id });
   recipe.name = req.body.name;
