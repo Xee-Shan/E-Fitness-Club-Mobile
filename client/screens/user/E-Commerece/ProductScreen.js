@@ -39,13 +39,14 @@ export default function ProductScreen({ navigation }) {
         <Text style={style.text}>Products</Text>
         {product.map((product, i) => {
           return (
-            <Card style={{ flex: 0 }} key={i}>
+            <Card style={{ width: 390, marginBottom: 40 }} key={i}>
               <CardItem>
                 <Body>
                   <Image
                     source={{ uri: product.imageURL }}
-                    style={{ height: 200, width: 200, flex: 1 }}
+                    style={{ height: 320, width: 350 }}
                   />
+                  <Text style={style.text1}>{product.name}</Text>
                   <Text>{product.brand}</Text>
                   <Text>${product.price}</Text>
                 </Body>
@@ -54,11 +55,11 @@ export default function ProductScreen({ navigation }) {
                 <Left>
                   <Button
                     onPress={() => btnClicked(product._id)}
-                    transparent
-                    textStyle={{ color: "#87838B" }}
+                    primary
+                    style={style.button}
                   >
                     {/* <Icon name="logo-github" /> */}
-                    <Text>Details</Text>
+                    <Text style={{ color: "white" }}>Details</Text>
                   </Button>
                 </Left>
               </CardItem>
@@ -76,5 +77,14 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 40,
     marginBottom: 20,
+  },
+  text1: {
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  button: {
+    marginLeft: 130,
+    padding: 20,
+    marginTop: -10,
   },
 });
