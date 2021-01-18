@@ -37,6 +37,14 @@ export default function RecipeDetailScreen({ route }) {
       <Header />
       <Content>
         <Text>{recipe?.name}</Text>
+        <Card>
+          <CardItem cardBody>
+            <Image
+              source={{ uri: recipe?.imageURL }}
+              style={{ height: 200, flex: 1 }}
+            />
+          </CardItem>
+        </Card>
         <Text>{recipe?.type}</Text>
         <Text>{recipe?.decsription}</Text>
       </Content>
