@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import {
   Container,
   Header,
@@ -151,10 +151,20 @@ export default function CartScreen({ navigation }) {
           ))}
         </Card>
         <Text>Total Amount : ${total}</Text>
-        <Button primary onPress={() => handleOrder()}>
-          <Text> Place Order </Text>
+        <Button primary onPress={() => handleOrder()}
+        style={style.button}
+        >
+          <Text style={{ color: "white" }}> Place Order </Text>
         </Button>
       </Content>
     </Container>
   );
 }
+const style = StyleSheet.create({
+
+button: {
+  marginLeft: 130,
+  padding: 20,
+  marginTop: -10,
+},
+});

@@ -34,7 +34,7 @@ export default function RecipeDetailScreen({ route }) {
     <Container>
       <Header />
       <Content>
-        <Text>{recipe?.name}</Text>
+        <Text style={style.Heading}>{recipe?.name}</Text>
         <Card>
           <CardItem cardBody>
             <Image
@@ -52,3 +52,9 @@ export default function RecipeDetailScreen({ route }) {
     </Container>
   );
 }
+const style = new StyleSheet.create({
+  Heading:{
+    fontSize:20,
+    fontWeight:"bold",
+  },
+});

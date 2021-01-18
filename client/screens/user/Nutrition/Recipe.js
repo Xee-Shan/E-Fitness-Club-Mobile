@@ -34,27 +34,28 @@ export default function RecipeScreen( {navigation} ) {
     <Container>
       <Header />
       <Content>
+        <Text style={style.text}>Recipes</Text>
         {recipe?.map((recipe, i) => {
           return (
-            <Card style={{ flex: 0 }} key={i}>
+            <Card style={{ width: 390 , marginBottom:40 }} key={i}>
               <CardItem>
                 <Body>
                   <Image
                     source={{ uri: recipe.imageURL }}
-                    style={{ height: 200, width: 200, flex: 1 }}
+                    style={{  width: 350, height: 320 }}
                   />
-                  <Text>{recipe.name}</Text>
-                  <Text>{recipe.type}</Text>
+                  <Text style={style.text1}>{recipe.name}</Text>
+                  <Text>Type: {recipe.type}</Text>
                 </Body>
               </CardItem>
               <CardItem>
                 <Left>
                   <Button
                     onPress={() => btnClicked(recipe._id)}
-                    transparent
-                    textStyle={{ color: "#87838B" }}
+                    primary
+                    style={style.button}
                   >
-                  <Text>Details</Text>
+                  <Text style={{ color: "white" }}>Details</Text>
                   </Button>
                 </Left>
               </CardItem>
@@ -66,4 +67,20 @@ export default function RecipeScreen( {navigation} ) {
   );
 }
 
-const styles = StyleSheet.create({});
+const style = StyleSheet.create({
+  text: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 40,
+    marginBottom: 20,
+  },
+  text1: {
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  button: {
+    marginLeft: 130,
+    padding: 20,
+    marginTop: -10,
+  },
+});
