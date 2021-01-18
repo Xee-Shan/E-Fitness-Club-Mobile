@@ -132,7 +132,9 @@ export default function ProductDetailScreen({ route, navigation }) {
           <CardItem>
             <Text>{`
               Name: ${product.name}
-              Price : ${product.price}
+              Price : ${product.price}(PKR)
+              Delivery Charges : ${product.deliveryCharges}(PKR)
+              Delivery Days : ${product.deliveryDays}
               Brand : ${product.brand}
               Description : ${product.description}
               Available: ${product.quantity - orderedQuantity}
