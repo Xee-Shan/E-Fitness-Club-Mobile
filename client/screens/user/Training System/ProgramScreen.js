@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   Container,
   Header,
@@ -8,8 +8,9 @@ import {
   Button,
   Left,
   Body,
+  Item,
 } from "native-base";
-import { Image, Text } from "react-native";
+import { Image, Text, StyleSheet } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -36,30 +37,33 @@ export default function Program({ navigation }) {
     <Container>
       <Header />
       <Content>
+        <Text style={style.text}>Programs</Text>
         {program?.map((data, i) => {
           return (
-            <Card style={{ flex: 0 }} key={i}>
+            <Card style={{ width: 390 }} key={i}>
               <CardItem>
                 <Body>
                   <Image
                     source={{ uri: data.imageURL }}
-                    style={{ height: 200, width: 200, flex: 1 }}
+                    style={{ width: 350, height: 320 }}
                   />
-                  <Text>{data.title}</Text>
-                  <Text>Target Area: {data.targetArea}</Text>
-                  <Text>Equipment:{data.equipment}</Text>
-                  <Text>Trainer: {data.userName}</Text>
+                  <Text style={style.text1}>{data.title}</Text>
+                  <Text style={style.text2}>
+                    Target Area: {data.targetArea}
+                  </Text>
+                  <Text style={style.text2}>Equipment: {data.equipment}</Text>
+                  <Text style={style.text2}>Trainer: {data.userName}</Text>
                 </Body>
               </CardItem>
               <CardItem>
                 <Left>
                   <Button
                     onPress={() => btnClicked(data._id)}
-                    transparent
-                    textStyle={{ color: "#87838B" }}
+                    primary
+                    style={style.button}
                   >
                     {/* <Icon name="logo-github" /> */}
-                    <Text>Details</Text>
+                    <Text style={{ color: "white" }}>Details</Text>
                   </Button>
                 </Left>
               </CardItem>
@@ -70,3 +74,25 @@ export default function Program({ navigation }) {
     </Container>
   );
 }
+
+const style = StyleSheet.create({
+  text: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 40,
+    marginBottom: 20,
+  },
+  text1: {
+    fontWeight: "bold",
+    fontSize: 30,
+    marginLeft: 100,
+  },
+  text2: {
+    marginLeft: 100,
+  },
+  button: {
+    marginLeft: 130,
+    padding: 20,
+    marginTop: -10,
+  },
+});

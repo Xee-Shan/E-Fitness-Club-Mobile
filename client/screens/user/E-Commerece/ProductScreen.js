@@ -9,7 +9,7 @@ import {
   Left,
   Body,
 } from "native-base";
-import { Image, Text } from "react-native";
+import { Image, Text, StyleSheet } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProductDetailScreen from "./ProductDetailScreen";
@@ -36,6 +36,7 @@ export default function ProductScreen({ navigation }) {
     <Container>
       <Header />
       <Content>
+        <Text style={style.text}>Products</Text>
         {product.map((product, i) => {
           return (
             <Card style={{ flex: 0 }} key={i}>
@@ -68,3 +69,12 @@ export default function ProductScreen({ navigation }) {
     </Container>
   );
 }
+
+const style = StyleSheet.create({
+  text: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 40,
+    marginBottom: 20,
+  },
+});
