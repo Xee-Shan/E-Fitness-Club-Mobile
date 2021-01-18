@@ -9,11 +9,11 @@ import {
   Left,
   Body,
 } from "native-base";
-import { Image, Text } from "react-native";
+import {StyleSheet, Image, Text } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function RecipeScreen() {
+export default function RecipeScreen( {navigation} ) {
   const [recipe, setRecipe] = useState();
 
   const fetchPrograms = async () => {
@@ -26,32 +26,35 @@ export default function RecipeScreen() {
     fetchPrograms();
   }, []);
 
+  const btnClicked = (id) => {
+    navigation.navigate("RecipeDetail", { id: id });
+  };
+
   return (
     <Container>
       <Header />
       <Content>
-        {recipe?.map((data, i) => {
+        {recipe?.map((recipe, i) => {
           return (
             <Card style={{ flex: 0 }} key={i}>
               <CardItem>
                 <Body>
                   <Image
-                    source={{ uri: data.imageURL }}
+                    source={{ uri: recipe.imageURL }}
                     style={{ height: 200, width: 200, flex: 1 }}
                   />
-                  <Text>{data.name}</Text>
-                  <Text>{data.type}</Text>
+                  <Text>{recipe.name}</Text>
+                  <Text>{recipe.type}</Text>
                 </Body>
               </CardItem>
               <CardItem>
                 <Left>
                   <Button
-                    //onPress={() => btnClicked(product._id)}
+                    onPress={() => btnClicked(recipe._id)}
                     transparent
                     textStyle={{ color: "#87838B" }}
                   >
-                    {/* <Icon name="logo-github" /> */}
-                    <Text>Details</Text>
+                  <Text>Details</Text>
                   </Button>
                 </Left>
               </CardItem>
@@ -62,3 +65,5 @@ export default function RecipeScreen() {
     </Container>
   );
 }
+
+const styles = StyleSheet.create({});

@@ -14,12 +14,18 @@ import { Image, Text } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function ProductScreen() {
+export default function ProductScreen({ navigation }) {
   const [blog, setBlog] = useState();
+
+  const btnClicked = (id) => {
+    navigation.navigate("BlogDetailScreen", { id: id });
+  };
 
   const fetchBlogs = async () => {
     const token = await AsyncStorage.getItem("auth-token");
-    const response = await axios.get("http://10.0.2.2:5002/blogs/get");
+    const response = await axios.get("http://10.0.2.2:5002/blogs/get", {
+      headers: { "x-auth-token": JSON.parse(token) },
+    });
     setBlog(response.data);
   };
 
@@ -46,7 +52,7 @@ export default function ProductScreen() {
               <CardItem>
                 <Left>
                   <Button
-                    //onPress={() => btnClicked(product._id)}
+                    onPress={() => btnClicked(data._id)}
                     transparent
                     textStyle={{ color: "#87838B" }}
                   >

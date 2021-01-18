@@ -41,7 +41,16 @@ router.post("/create", upload.single("image"), async (req, res) => {
 
 //get product
 router.get("/get", async (req, res) => {
-  const recipe = await Recipe.find((err, doc) => {
+  await Recipe.find((err, doc) => {
+    if (err) res.status(400).send(err);
+    res.status(200).send(doc);
+  });
+});
+
+
+//Get Recipes by id
+router.get("/get/:id", async (req, res) => {
+  await Recipe.findById(req.params.id).exec((err, doc) => {
     if (err) res.status(400).send(err);
     res.status(200).send(doc);
   });

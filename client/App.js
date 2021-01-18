@@ -5,18 +5,21 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import SplashScreen from "./screens/SplashScreen";
-import HomeScreen from "./screens/HomeScreen";
+// import HomeScreen from "./screens/HomeScreen";
+// import AboutScreen from "./screens/AboutScreen";
+// import ContactScreen from "./screens/ContactScreen";
 import LoginScreen from "./screens/LoginScreen";
-import AboutScreen from "./screens/AboutScreen";
-import ContactScreen from "./screens/ContactScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import ProductScreen from "./screens/user/E-Commerece/ProductScreen";
-import ProgramScreen from "./screens/user/Training System/Program";
-import BlogScreen from "./screens/user/Blogs/Blog";
+import ProgramScreen from "./screens/user/Training System/ProgramScreen";
+import BlogScreen from "./screens/user/Blogs/BlogScreen";
 import ProductDetailScreen from "./screens/user/E-Commerece/ProductDetailScreen";
 import CartScreen from "./screens/user/E-Commerece/CartScreen";
 import RecipeScreen from "./screens/user/Nutrition/Recipe";
+import RecipeDetailScreen from "./screens/user/Nutrition/RecipeDetails";
 import DietPlanScreen from "./screens/user/Nutrition/DietPlan";
+import ProgramDetailScreen from "./screens/user/Training System/ProgramDetailScreen";
+import BlogDetailScreen from "./screens/user/Blogs/BlogDetailScreen";
 import { StyleSheet } from "react-native";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -68,6 +71,9 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="UserAccount" component={UserDrawer} />
         <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} />
+        <Stack.Screen name="ProgramDetail" component={ProgramDetailScreen} />
+        <Stack.Screen name="BlogDetailScreen" component={BlogDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
