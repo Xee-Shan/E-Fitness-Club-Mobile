@@ -105,7 +105,7 @@ export default function CartScreen({ navigation }) {
 
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");
-        axios.post("http://10.0.2.2:5002/orders/placeOrder"+total, cart, {
+        axios.post("http://10.0.2.2:5002/orders/placeOrder/"+total, cart, {
           headers: { "x-auth-token": JSON.parse(token) },
         });
         alert("Order placed successfully!!!");
