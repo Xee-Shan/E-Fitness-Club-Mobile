@@ -58,7 +58,9 @@ export default function ProductScreen({ navigation }) {
                     primary
                     style={style.button}
                   >
-                    <Text style={{ color: "white" }}>Details</Text>
+                    <Text style={{ color: "white", fontSize: 20 }}>
+                      Details
+                    </Text>
                   </Button>
                 </Left>
               </CardItem>
@@ -82,7 +84,7 @@ const style = StyleSheet.create({
     fontSize: 30,
   },
   button: {
-    marginLeft: 130,
+    marginLeft: 120,
     padding: 20,
     marginTop: -10,
   },

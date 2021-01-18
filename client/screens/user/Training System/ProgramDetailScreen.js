@@ -46,10 +46,10 @@ export default function ProgramDetailScreen({ route }) {
           </CardItem>
         </Card>
         <Text style={style.Heading1}>Description</Text>
-        <Text>{program?.description}</Text>
+        <Text style={{ marginBottom: 20 }}>{program?.description}</Text>
         {program?.exercise?.map((data, i) => {
           return (
-            <View key={i}>
+            <View style={{ marginBottom: 20 }} key={i}>
               <Text>{data.day}</Text>
               <Text>{data.area}</Text>
             </View>
@@ -57,7 +57,7 @@ export default function ProgramDetailScreen({ route }) {
         })}
         {program?.workoutList?.map((data, i) => {
           return (
-            <View key={i}>
+            <View style={{ marginBottom: 20 }} key={i}>
               <Text>{data.exerciseName}</Text>
               <Text>{data.reps}</Text>
               <Text>{data.sets}</Text>
@@ -85,13 +85,13 @@ export default function ProgramDetailScreen({ route }) {
 }
 
 const style = new StyleSheet.create({
-  Heading:{
-    fontSize:30,
-    fontWeight:"bold",
-    textAlign:"center",
+  Heading: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
   },
-  Heading1:{
-    fontSize:20,
-    fontWeight:"bold",
+  Heading1: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

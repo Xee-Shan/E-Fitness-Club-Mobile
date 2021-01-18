@@ -63,7 +63,9 @@ export default function Program({ navigation }) {
                     style={style.button}
                   >
                     {/* <Icon name="logo-github" /> */}
-                    <Text style={{ color: "white" }}>Details</Text>
+                    <Text style={{ color: "white", fontSize: 20 }}>
+                      Details
+                    </Text>
                   </Button>
                 </Left>
               </CardItem>
@@ -79,16 +81,16 @@ const style = StyleSheet.create({
   text: {
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 40,
+    fontSize: 30,
     marginBottom: 20,
   },
   text1: {
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 20,
   },
 
   button: {
-    marginLeft: 130,
+    marginLeft: 120,
     padding: 20,
     marginTop: -10,
   },
