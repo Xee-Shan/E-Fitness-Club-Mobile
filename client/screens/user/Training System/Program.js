@@ -13,12 +13,18 @@ import { Image, Text } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function ProductScreen() {
+export default function Program({ navigation }) {
   const [program, setProgram] = useState();
+
+  const btnClicked = (id) => {
+    navigation.navigate("ProgramDetail", { id: id });
+  };
 
   const fetchPrograms = async () => {
     const token = await AsyncStorage.getItem("auth-token");
-    const response = await axios.get("http://10.0.2.2:5002/trainings/get");
+    const response = await axios.get("http://10.0.2.2:5002/trainings/get", {
+      headers: { "x-auth-token": JSON.parse(token) },
+    });
     setProgram(response.data);
   };
 
@@ -46,7 +52,7 @@ export default function ProductScreen() {
               <CardItem>
                 <Left>
                   <Button
-                    //onPress={() => btnClicked(product._id)}
+                    onPress={() => btnClicked(data._id)}
                     transparent
                     textStyle={{ color: "#87838B" }}
                   >

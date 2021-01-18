@@ -17,6 +17,7 @@ import ProductDetailScreen from "./screens/user/E-Commerece/ProductDetailScreen"
 import CartScreen from "./screens/user/E-Commerece/CartScreen";
 import RecipeScreen from "./screens/user/Nutrition/Recipe";
 import DietPlanScreen from "./screens/user/Nutrition/DietPlan";
+import ProgramDetailScreen from "./screens/user/Training System/ProgramDetailScreen";
 import { StyleSheet } from "react-native";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -68,6 +69,7 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="UserAccount" component={UserDrawer} />
         <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen name="ProgramDetail" component={ProgramDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
