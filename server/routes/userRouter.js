@@ -4,7 +4,17 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const { User } = require("../models/userModel");
 const admin = require("../middleware/admin");
-const { json } = require("express");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+
+let smtpTransport = nodemailer.createTransport({
+  service: "Gmail",
+  port: 465,
+  auth: {
+    user: "efitnessclub7@gmail.com",
+    pass: "efitness",
+  },
+});
 
 router.post("/register", async (req, res) => {
   try {
@@ -33,45 +43,45 @@ router.post("/register", async (req, res) => {
       !phoneNumber ||
       !address
     )
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+      return res.status(400).json({ msg: "Not all fields have been entered" });
 
     var valid = emailRegex.test(email);
-    if (!valid) res.status(400).json({ msg: "Please enter correct email." });
+    if (!valid) res.status(400).json({ msg: "Please enter correct email" });
 
     const existingUser = await User.findOne({ email: email });
     if (existingUser)
       return res
         .status(400)
-        .json({ msg: "An account with this email already exists." });
+        .json({ msg: "An account with this email already exists" });
 
     if (userName.length > 10)
       return res.status(400).json({
-        msg: "The username needs to be less than or equal to 10 character.",
+        msg: "The username needs to be less than or equal to 10 character",
       });
 
     const existingUserName = await User.findOne({ userName: userName });
     if (existingUserName)
       return res
         .status(400)
-        .json({ msg: "An Account with this username already exists." });
+        .json({ msg: "An Account with this username already exists" });
 
     if (password.length < 5)
       return res
         .status(400)
-        .json({ msg: "The password needs to be at least 5 characters long." });
+        .json({ msg: "The password needs to be at least 5 characters long" });
 
     if (password !== passwordCheck)
       return res
         .status(400)
-        .json({ msg: "Enter the same password twice for verification." });
+        .json({ msg: "Enter the same password twice for verification" });
 
     if (gender !== "Male" && gender !== "Female")
-      return res.status(400).json({ msg: "Please select correct gender." });
+      return res.status(400).json({ msg: "Please select correct gender" });
 
     if (phoneNumber.length !== 11)
       return res
         .status(400)
-        .json({ msg: "The phone number needs to be 11 digits long." });
+        .json({ msg: "The phone number needs to be 11 digits long" });
 
     const existingPhoneNumber = await User.findOne({
       phoneNumber: phoneNumber,
@@ -79,8 +89,7 @@ router.post("/register", async (req, res) => {
     if (existingPhoneNumber)
       return res
         .status(400)
-        .json({ msg: "An account with this phone number already exists." });
-
+        .json({ msg: "An account with this phone number already exists" });
     let duplicatePassword = password;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
@@ -95,15 +104,8 @@ router.post("/register", async (req, res) => {
       role,
       address,
     });
-    newUser.save((err, doc) => {
-      if (err) {
-        return res.status(400).json({ success: false });
-      } else {
-        return res.status(200).json({ success: true });
-      }
-    });
 
-    /*  if (newUser.role === "user") {
+    if (newUser.role === "user") {
       const saveUser = newUser.save().then((user) => {
         smtpTransport.sendMail({
           to: user.email,
@@ -124,10 +126,27 @@ router.post("/register", async (req, res) => {
         });
         res.json(saveEmployee);
       });
-    }*/
+    }
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+router.put("/editUser",auth, async (req, res) => {
+  const {name,address,email,phoneNumber,userName}=req.body;
+    if(!name||!address||!email||!phoneNumber||!userName)
+      return res.status(400).json({ msg: "Not all fields have been entered" });
+  const user=await User.findById(req.user);
+  user.name=req.body.name;
+  user.address=req.body.address;
+  user.email=req.body.email;
+  user.phoneNumber=req.body.phoneNumber;
+  user.userName=req.body.userName;
+  await user.save((err) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
+
 });
 
 router.post("/login", async (req, res) => {
@@ -137,19 +156,19 @@ router.post("/login", async (req, res) => {
   //validate
   try {
     if (!email || !password)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+      return res.status(400).json({ msg: "Not all fields have been entered" });
 
     var valid = emailRegex.test(email);
-    if (!valid) res.status(400).json({ msg: "Please enter correct email." });
+    if (!valid) res.status(400).json({ msg: "Please enter correct email" });
 
     const user = await User.findOne({ email: email });
     if (!user)
       return res
         .status(400)
-        .json({ msg: "No account with this email has been registered." });
+        .json({ msg: "No account with this email has been registered" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials.." });
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
     const token = jwt.sign({ id: user._id }, process.env.jwt_Secret);
     res.json({
@@ -168,6 +187,17 @@ router.post("/login", async (req, res) => {
 //Reset Password
 router.post("/reset", async (req, res) => {
   let { email } = req.body;
+  var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+
+  if (!email) {
+    return res.status(400).json({ msg: "Please enter your email" });
+  }
+
+  var valid = emailRegex.test(email);
+  if (!valid) {
+    return res.status(400).json({ msg: "Please enter correct email" });
+  }
+
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);
@@ -177,7 +207,7 @@ router.post("/reset", async (req, res) => {
       if (!user) {
         return res
           .status(400)
-          .json({ error: "User Do Not Exist With This E-mail" });
+          .json({ msg: "User do not exist with this email" });
       }
       user.resetToken = token;
       user.expireToken = Date.now() + 3600000;
@@ -190,7 +220,7 @@ router.post("/reset", async (req, res) => {
           <h5>Click on the <a href="http://localhost:3000/new/password/${token}">Link</a> to Reset Your Password</h5>
           `,
         });
-        res.json({ message: "Check your E-mail" });
+        res.json({ msg: "Check your email" });
       });
     });
   });
@@ -199,23 +229,29 @@ router.post("/reset", async (req, res) => {
 //New Password
 router.post("/new/password", async (req, res) => {
   const { password, token } = req.body;
-
-  const user = await User.findOne({
+  if (!password) {
+    res.status(400).json({ msg: "Please enter your new password" });
+  }
+  await User.findOne({
     resetToken: token,
     expireToken: { $gt: Date.now() },
-  }).then((user) => {
-    if (!user) {
-      //return res.status(400).json({ error: "Try again session expired" });
-    }
-    bcrypt.hash(password, 12).then((hashpassword) => {
-      user.password = hashpassword;
-      user.resetToken = undefined;
-      user.expireToken = undefined;
-      user.save().then((saveUser) => {
-        res.json({ message: "password updated success" });
+  })
+    .then((user) => {
+      if (!user) {
+        return res.status(400).json({ msg: "Try again session expired" });
+      }
+      bcrypt.hash(password, 12).then((hashpassword) => {
+        user.password = hashpassword;
+        user.resetToken = undefined;
+        user.expireToken = undefined;
+        user.save().then((saveUser) => {
+          res.json({ msg: "Your password is updated" });
+        });
       });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 });
 
 router.delete("/delete", auth, async (req, res) => {
@@ -280,7 +316,34 @@ router.get("/get/employee", auth, admin, async (req, res) => {
   });
   res.status(200).send(employee);
 });
+//get count of different types of users
+router.get("/get/countOfUser", auth, admin, async (req, res) => {
+  let count={
+    trainerCount:0,
+    nutritionistCount:0,
+    userCount:0,
+    physiatristCount:0
+  };
+  const users = await User.find((err) => {
+    if (err) res.status(400).send(err);
+  });
+  users.map((user) => {
+    if (user.role === "user") {
+      count.userCount++;
+    }
+    if (user.role === "trainer") {
+      count.trainerCount++;
+    }
+    if (user.role === "nutritionist") {
+      count.nutritionistCount++;
+    }
+    if (user.role === "physiatrist") {
+      count.physiatristCount++;
+    }
 
+  });
+  res.status(200).send(count);
+});
 //delete an employee
 router.delete("/delete/employee/:id", auth, admin, async (req, res) => {
   await User.findByIdAndDelete({ _id: req.params.id });
@@ -311,10 +374,7 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
         { $inc: { "cart.$.quantity": myQuantity } },
         { new: true },
         (err, userInfo) => {
-          if (err) {
-            console.log(err);
-            return res.json({ success: false, err });
-          }
+          if (err) return res.json({ success: false, err });
           res.status(200).json(userInfo.cart.quantity);
         }
       );
@@ -330,6 +390,7 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
               imageURL: req.body.imageURL,
               brand: req.body.brand,
               price: req.body.price,
+              deliveryCharges:req.body.deliveryCharges,
               date: Date.now(),
             },
           },
@@ -343,7 +404,6 @@ router.post("/addToCart/:myQuantity", auth, async (req, res) => {
     }
   });
 });
-
 //get cart
 router.get("/getCart", auth, async (req, res) => {
   const user = await User.findById(req.user);
@@ -361,6 +421,7 @@ router.delete("/removeFromCart/:id", auth, async (req, res) => {
   // )
 
   const user = await User.findByIdAndUpdate(req.user);
+
   const arr = user.cart.filter((cart) => {
     return cart.id !== req.params.id;
   });
