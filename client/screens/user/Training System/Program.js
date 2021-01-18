@@ -46,7 +46,9 @@ export default function Program({ navigation }) {
                     style={{ height: 200, width: 200, flex: 1 }}
                   />
                   <Text>{data.title}</Text>
-                  <Text>{data.targetArea}</Text>
+                  <Text>Target Area: {data.targetArea}</Text>
+                  <Text>Equipment:{data.equipment}</Text>
+                  <Text>Trainer: {data.userName}</Text>
                 </Body>
               </CardItem>
               <CardItem>
