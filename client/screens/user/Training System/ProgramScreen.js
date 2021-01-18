@@ -40,7 +40,7 @@ export default function Program({ navigation }) {
         <Text style={style.text}>Programs</Text>
         {program?.map((data, i) => {
           return (
-            <Card style={{ width: 390 }} key={i}>
+            <Card style={{ width: 390, marginBottom: 10 }} key={i}>
               <CardItem>
                 <Body>
                   <Image
@@ -51,8 +51,8 @@ export default function Program({ navigation }) {
                   <Text style={style.text2}>
                     Target Area: {data.targetArea}
                   </Text>
-                  <Text style={style.text2}>Equipment: {data.equipment}</Text>
-                  <Text style={style.text2}>Trainer: {data.userName}</Text>
+                  <Text>Equipment: {data.equipment}</Text>
+                  <Text>Trainer: {data.userName}</Text>
                 </Body>
               </CardItem>
               <CardItem>
@@ -85,11 +85,8 @@ const style = StyleSheet.create({
   text1: {
     fontWeight: "bold",
     fontSize: 30,
-    marginLeft: 100,
   },
-  text2: {
-    marginLeft: 100,
-  },
+
   button: {
     marginLeft: 130,
     padding: 20,
