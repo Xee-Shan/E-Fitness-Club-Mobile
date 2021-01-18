@@ -70,7 +70,7 @@ export default function CartScreen({ navigation }) {
   function calculate(cart) {
     let amount = 0;
     cart.map((cart) => {
-      amount += cart.quantity * cart.price;
+      amount += cart.quantity * (cart.price+cart.deliveryCharges);
       return amount;
     });
     setTotal(amount);
@@ -105,7 +105,7 @@ export default function CartScreen({ navigation }) {
 
       if (item.quantity <= product.quantity - orderedQuantity) {
         const token = await AsyncStorage.getItem("auth-token");
-        axios.post("http://10.0.2.2:5002/orders/placeOrder", cart, {
+        axios.post("http://10.0.2.2:5002/orders/placeOrder"+total, cart, {
           headers: { "x-auth-token": JSON.parse(token) },
         });
         alert("Order placed successfully!!!");
