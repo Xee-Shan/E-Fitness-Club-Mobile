@@ -49,17 +49,6 @@ export default function CartScreen({ navigation }) {
     fetchData();
   }, []);
 
-  /*
-  useEffect(()=>{
-    async function fetchData() {
-         await axios.get("http://localhost:5000/orders/get",{headers:{"x-auth-token":localStorage.getItem("auth-token")}})
-         .then(res=>{
-           setOrder(res.data)
-          });            
-      }
-      fetchData();
-},[order]);*/
-
   useEffect(() => {
     if (cart?.length >= 0) {
       calculate(cart);
