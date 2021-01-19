@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { StyleSheet } from "react-native";
 import { Image, Text } from "react-native";
-import HTML from "react-native-render-html";
+
 import {
   Container,
   Header,
@@ -34,7 +34,7 @@ export default function DietPlanDetail({ route }) {
     <Container>
       <Header />
       <Content>
-        <Text style={style.Heading}>{dietPlan?.day}</Text>
+        <Text style={style.Heading}>{dietPlan?.title}</Text>
         <Card>
           <CardItem cardBody>
             <Image
@@ -43,12 +43,21 @@ export default function DietPlanDetail({ route }) {
             />
           </CardItem>
         </Card>
-        <Text style={style.Heading1}>User Type</Text>
-        <Text style={style.margin}>{dietPlan?.userType}</Text>
-        <Text style={style.Heading1}>Diet Type</Text>
-        <Text style={style.margin}>{dietPlan?.dietType}</Text>
-        <Text style={style.Heading1}>Diet</Text>
-        <HTML source={{ html: dietPlan?.diet }}/>
+        {dietPlan?.dietList?.map((data, i) => {
+          return (
+            <View style={{ marginBottom: 20 }} key={i}>
+              <Text style={style.Heading1}>Description</Text>
+              <Text>{data.day}</Text>
+              <Text style={style.Heading1}>User Type</Text>
+              <Text>{dietPlan.userType}</Text>
+              <Text style={style.Heading1}>Dit Type</Text>
+              <Text>{data.dietType}</Text>
+              <Text style={style.Heading1}>Diet</Text>
+              <Text>{data.diet}</Text>
+            </View>
+          );
+        })}
+
         </Content>
     </Container>
   );
@@ -60,11 +69,8 @@ const style = new StyleSheet.create({
     fontWeight:"bold",
     textAlign:"center",
   },
-  Heading1:{
-    fontSize:20,
-    fontWeight:"bold",
-  },
-  margin:{
-    marginBottom:10,
+  Heading1: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
