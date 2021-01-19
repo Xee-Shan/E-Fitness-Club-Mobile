@@ -119,14 +119,24 @@ export default function ProductDetailScreen({ route, navigation }) {
     <Container>
       <Header />
       <Content>
-        <Card>
+        <Text
+          style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 30,
+            marginBottom: 10,
+          }}
+        >
+          {product.name}
+        </Text>
+        <Card style={{ width: 390 }}>
           <CardItem cardBody>
             <Image
               source={{ uri: product.imageURL }}
-              style={{ height: 200, width: null, flex: 1 }}
+              style={{ height: 320, width: 350 }}
             />
           </CardItem>
-          <CardItem>
+          {/* <CardItem>
             <Text>{`
               Name: ${product.name}
               Price : ${product.price}(PKR)
@@ -136,21 +146,45 @@ export default function ProductDetailScreen({ route, navigation }) {
               Description : ${product.description}
               Available: ${product.quantity - orderedQuantity}
             `}</Text>
-          </CardItem>
+          </CardItem> */}
         </Card>
-        <Button primary onPress={increment}>
-          <Text>+</Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 10 }}>
+          Information
+        </Text>
+        <Text>Brand: {product.brand}</Text>
+        <Text>Price: ${product.price}</Text>
+        <Text>Delivery Charges: ${product.deliveryCharges}</Text>
+        <Text>Delivery Days: {product.deliveryDays}</Text>
+        <Text>Available: {product.quantity - orderedQuantity}</Text>
+        <Button
+          primary
+          onPress={increment}
+          style={{ padding: 20, marginTop: 10 }}
+        >
+          <Text style={{ color: "white" }}>+</Text>
         </Button>
         <Input
           value={JSON.stringify(myQuantity)}
           onChangeText={(value) => setMyQuantity(value)}
         />
-        <Button primary onPress={decrement}>
-          <Text>-</Text>
+        <Button
+          primary
+          onPress={decrement}
+          style={{ padding: 22, marginBottom: 10 }}
+        >
+          <Text style={{ color: "white" }}>-</Text>
         </Button>
-        <Button primary onPress={() => btnClicked(product)}>
-          <Text> Add to Cart </Text>
+        <Button
+          primary
+          onPress={() => btnClicked(product)}
+          style={{ padding: 20 }}
+        >
+          <Text style={{ color: "white" }}> Add to Cart </Text>
         </Button>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 10 }}>
+          Description
+        </Text>
+        <Text>{product.description}</Text>
       </Content>
     </Container>
   );

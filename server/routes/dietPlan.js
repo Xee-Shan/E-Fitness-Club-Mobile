@@ -20,7 +20,15 @@ router.post("/create", async (req, res) => {
 
 //get Diet Plan
 router.get("/get", async (req, res) => {
-  const dietPlan = await DietPlan.find((err, doc) => {
+  await DietPlan.find((err, doc) => {
+    if (err) res.status(400).send(err);
+    res.status(200).send(doc);
+  });
+});
+
+//Get Recipes by id
+router.get("/get/:id", async (req, res) => {
+  await DietPlan.findById(req.params.id).exec((err, doc) => {
     if (err) res.status(400).send(err);
     res.status(200).send(doc);
   });

@@ -12,18 +12,18 @@ import {
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function RecipeDetailScreen({ route }) {
-  const [recipe, setRecipe] = useState();
+export default function DietPlanDetail({ route }) {
+  const [dietPlan, setDietPlan] = useState();
 
   const fetchData = async () => {
     const token = await AsyncStorage.getItem("auth-token");
     const res = await axios.get(
-      "http://10.0.2.2:5002/recipes/get/" + route.params.id,
+      "http://10.0.2.2:5002/dietPlan/get/" + route.params.id,
       {
         headers: { "x-auth-token": JSON.parse(token) },
       }
     );
-    setRecipe(res.data);
+    setDietPlan(res.data);
   };
 
   useEffect(() => {
@@ -34,30 +34,26 @@ export default function RecipeDetailScreen({ route }) {
     <Container>
       <Header />
       <Content>
-        <Text style={style.Heading}>{recipe?.name}</Text>
-        <Card style={{marginBottom:10}}>
+        <Text style={style.Heading}>{dietPlan?.day}</Text>
+        <Card>
           <CardItem cardBody>
             <Image
-              source={{ uri: recipe?.imageURL }}
+              source={{ uri: dietPlan?.imageURL }}
               style={{ height: 200, flex: 1 }}
             />
           </CardItem>
         </Card>
-        <Text style={style.Heading1}>Type</Text>
-        <Text style={style.margin}>{recipe?.type}</Text>
-        <Text style={style.Heading1}>Category</Text>
-        <Text style={style.margin}>{recipe?.category}</Text>
-        <Text style={style.Heading1}>Description</Text>
-        <Text style={style.margin}>{recipe?.description}</Text>
-        <Text style={style.Heading1}>Ingredients</Text>
-        <HTML source={{ html: recipe?.ingredients }} 
-              style={style.margin}/>
-        <Text style={style.Heading1}>Method</Text>
-        <HTML source={{ html: recipe?.method }} />
+        <Text style={style.Heading1}>User Type</Text>
+        <Text style={style.margin}>{dietPlan?.userType}</Text>
+        <Text style={style.Heading1}>Diet Type</Text>
+        <Text style={style.margin}>{dietPlan?.dietType}</Text>
+        <Text style={style.Heading1}>Diet</Text>
+        <HTML source={{ html: dietPlan?.diet }}/>
         </Content>
     </Container>
   );
 }
+
 const style = new StyleSheet.create({
   Heading:{
     fontSize:30,

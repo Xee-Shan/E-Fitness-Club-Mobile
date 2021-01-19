@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { StyleSheet } from "react-native";
 import { Image, Text } from "react-native";
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Button,
-  Input,
-  View,
-} from "native-base";
+import HTML from "react-native-render-html";
+import { Container, Header, Content, Card, CardItem } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function BlogDetail({ route }) {
@@ -37,7 +28,16 @@ export default function BlogDetail({ route }) {
     <Container>
       <Header />
       <Content>
-        <Text>{blog?.title}</Text>
+        <Text
+          style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 40,
+            marginBottom: 10,
+          }}
+        >
+          {blog?.title}
+        </Text>
         <Card>
           <CardItem cardBody>
             <Image
@@ -46,6 +46,7 @@ export default function BlogDetail({ route }) {
             />
           </CardItem>
         </Card>
+        <HTML source={{ html: blog?.content }} />
       </Content>
     </Container>
   );
