@@ -16,7 +16,6 @@ export default function BlogDetail({ route }) {
         headers: { "x-auth-token": JSON.parse(token) },
       }
     );
-    console.log(res.data);
     setBlog(res.data);
   };
 

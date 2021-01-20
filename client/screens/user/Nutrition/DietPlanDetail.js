@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { StyleSheet } from "react-native";
-import { Image, Text } from "react-native";
+import { Image, Text, View } from "react-native";
 
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-} from "native-base";
+import { Container, Header, Content, Card, CardItem } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function DietPlanDetail({ route }) {
@@ -43,34 +37,28 @@ export default function DietPlanDetail({ route }) {
             />
           </CardItem>
         </Card>
+        <Text style={{ textAlign: "center", fontSize: 20, fontWeight: "bold" }}>
+          Complete Diet Plan
+        </Text>
+
         {dietPlan?.dietList?.map((data, i) => {
           return (
             <View style={{ marginBottom: 20 }} key={i}>
-              <Text style={style.Heading1}>Description</Text>
-              <Text>{data.day}</Text>
-              <Text style={style.Heading1}>User Type</Text>
-              <Text>{dietPlan.userType}</Text>
-              <Text style={style.Heading1}>Dit Type</Text>
-              <Text>{data.dietType}</Text>
-              <Text style={style.Heading1}>Diet</Text>
-              <Text>{data.diet}</Text>
+              <Text style={{ textAlign: "center" }}>{data.day}</Text>
+              <Text style={{ textAlign: "center" }}>{data.dietType}</Text>
+              <Text style={{ textAlign: "center" }}>{data.diet}</Text>
             </View>
           );
         })}
-
-        </Content>
+      </Content>
     </Container>
   );
 }
 
 const style = new StyleSheet.create({
-  Heading:{
-    fontSize:30,
-    fontWeight:"bold",
-    textAlign:"center",
-  },
-  Heading1: {
-    fontSize: 20,
+  Heading: {
+    fontSize: 30,
     fontWeight: "bold",
+    textAlign: "center",
   },
 });

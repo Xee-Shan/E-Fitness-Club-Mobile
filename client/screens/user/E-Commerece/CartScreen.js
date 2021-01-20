@@ -135,9 +135,7 @@ export default function CartScreen({ navigation }) {
           ))}
         </Card>
         <Text>Total Amount : ${total}</Text>
-        <Button primary onPress={() => handleOrder()}
-        style={style.button}
-        >
+        <Button primary onPress={() => handleOrder()} style={style.button}>
           <Text style={{ color: "white" }}> Place Order </Text>
         </Button>
       </Content>
@@ -145,10 +143,9 @@ export default function CartScreen({ navigation }) {
   );
 }
 const style = StyleSheet.create({
-
-button: {
-  marginLeft: 130,
-  padding: 20,
-  marginTop: -10,
-},
+  button: {
+    marginLeft: 130,
+    padding: 20,
+    marginTop: 30,
+  },
 });

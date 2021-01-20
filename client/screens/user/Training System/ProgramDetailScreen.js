@@ -47,20 +47,27 @@ export default function ProgramDetailScreen({ route }) {
         </Card>
         <Text style={style.Heading1}>Description</Text>
         <Text style={{ marginBottom: 20 }}>{program?.description}</Text>
+        <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 20 }}>
+          Schedule
+        </Text>
         {program?.exercise?.map((data, i) => {
           return (
             <View style={{ marginBottom: 20 }} key={i}>
-              <Text>{data.day}</Text>
-              <Text>{data.area}</Text>
+              <Text style={{ textAlign: "center" }}>{data.day}</Text>
+              <Text style={{ textAlign: "center" }}>{data.area}</Text>
             </View>
           );
         })}
+        <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 20 }}>
+          Workout Plan
+        </Text>
         {program?.workoutList?.map((data, i) => {
           return (
             <View style={{ marginBottom: 20 }} key={i}>
-              <Text>{data.exerciseName}</Text>
-              <Text>{data.reps}</Text>
-              <Text>{data.sets}</Text>
+              <Text style={{ textAlign: "center" }}>{data.day}</Text>
+              <Text style={{ textAlign: "center" }}>{data.exerciseName}</Text>
+              <Text style={{ textAlign: "center" }}>{data.reps}</Text>
+              <Text style={{ textAlign: "center" }}>{data.sets}</Text>
             </View>
           );
         })}
